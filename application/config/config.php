@@ -26,7 +26,7 @@ $config['base_url']	= '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = 'http://localhost:8888/testphp/simple-php-shopping-cart/';
 
 /*
 |--------------------------------------------------------------------------
