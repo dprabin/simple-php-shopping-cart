@@ -46,7 +46,7 @@ body {
 
 .food-price{
 	position: absolute;
-	bottom: 100px;
+	bottom: 110px;
 	right: 15px;
 	background: rgba(59,126,20,0.5);
 	color: #fff;
@@ -85,4 +85,11 @@ body {
 	height: 70px;
 	text-align: center;
 	padding-top:20px;
+}
+
+.qty{
+	width: 40px;
+	color: #666 !important;
+	text-align: center;
+	margin-bottom: 20px;
 }
