@@ -8,11 +8,11 @@
 <title>The Sasto Ramro Food Place</title>
 
 <!-- Bootstrap core CSS -->
-<link href="css/bootstrap.css" rel="stylesheet">
+<link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="css/custom.css" rel="stylesheet">
-<script src="js/bootstrap.js"></script>
+<link href="<?php echo base_url(); ?>assets/css/custom.css" rel="stylesheet">
+<script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
 <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script-->
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
