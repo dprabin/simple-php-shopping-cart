@@ -66,15 +66,8 @@ body {
 	overflow: hidden;
 }
 
-
-
 .food-image-img{
 	width: 100%;
-}
-
-.details-price{
-	font-size: 25px;
-	margin-bottom: 20px;
 }
 
 .details img{
@@ -107,7 +100,22 @@ body {
 	overflow: hidden;
 }
 
+.details-food-price{
+	text-align: center;
+	font-size: 28px;
+	margin-bottom: 5px;
+	background: rgba(59,126,20,0.5);
+	color: #fff;
+	padding:5px;
+}
+.details-food-title{
+	text-align: left;
+}
 
+.details-buy{
+	text-align: center;
+	vertical-align: middle;
+}
 
  /*
   *end of details.php view
