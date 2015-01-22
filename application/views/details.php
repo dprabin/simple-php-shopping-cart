@@ -1,17 +1,21 @@
 <div class="row details">
 	<div class="col-md-4">
-		<div class="food-image"><img class="food-image-img" src="images/almond1.jpg" /></div>
+		<div class="food-image-details"><img class="food-image-img" src="<?php echo base_url(); ?>assets/images/products/<?php echo $product->image; ?>" /></div>
 	</div>
 	<div class="col-md-8">
-		<h3>Crunchy and Fresh Almonds</h3>
-		<div class="details-price">Price: Rs.950</div>
+		<h3><?php echo $product->title; ?></h3>
+		<div class="details-price">Price: Rs.<?php echo $product->price; ?> per <?php echo $product->unit; ?></div>
 		<div class="details-description">
-		  <p>Almonds: The almond is a species of tree native to the Middle East and South Asia. "Almond" is also the name of the edible and widely cultivated seed of this tree. Within the genus Prunus, it is classified with the peach in the subgenus Amygdalus, distinguished from the other subgenera by the corrugated shell (endocarp) surrounding the seed.</p>
+		  <p><?php echo $product->description; ?></p>
 		</div>
 		<div class="details-buy">
-		  <form>
-		    <button type="submit" name="buy_submit" class="btn btn-primary">Add to Cart</button>
-		  </form>
+			<form method="post" action="<php echo base_url(); ?>cart/add">
+				QTY: <input type="text" class="qty" name="qty" value="1" /> 
+				<input type="hidden" name="item_number" value="<?php echo $product->id; ?>" />
+				<input type="hidden" name="price" value="<?php echo $product->price; ?>" />
+				<input type="hidden" name="title" value="<?php echo $product->title; ?>" />
+				<button class="btn btn-primary" type="submit">Add To Cart</button>
+			</form>
 		</div>
 	</div>
 </div>
