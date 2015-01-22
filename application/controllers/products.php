@@ -1,9 +1,11 @@
 <?php 
 class Products extends CI_Controller{
     public function index(){
-        $data['name'] = 'Prabin';
+        //Defint the main content as products
+        $data['main_content'] = 'products';
         //load product view
-        $this->load->view('products',$data);
+        
+        $this->load->view('layouts/main',$data);
     }
 }
 
