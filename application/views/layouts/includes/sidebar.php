@@ -25,11 +25,9 @@
     <h3 class="panel-title">Categories</h3>
   </div>
   <ul class="list-group">
-    <li class="list-group-item"><a href="#">Pulses and Legumes</a></li>
-    <li class="list-group-item"><a href="#">Rice and Grains</a></li>
-    <li class="list-group-item"><a href="#">Dry Fruits</a></li>
-    <li class="list-group-item"><a href="#">Readymade Food</a></li>
-    <li class="list-group-item"><a href="#">Special food items</a></li>
+    <?php foreach(get_categories_h() as $category) : ?>
+      <li class="list-group-item"><a href="<?php echo base_url(); ?>products/category/<?php echo $category->id; ?>"><?php echo $category->name; ?></a></li>
+    <?php endforeach; ?>
   </ul>
 </div><!--/Categories panel -->
 
@@ -38,8 +36,8 @@
     <h3 class="panel-title">Most Popular</h3>
   </div>
   <ul class="list-group">
-    <li class="list-group-item"><a href="#">Rice and Grains</a></li>
-    <li class="list-group-item"><a href="#">Pulses and Legumes</a></li>
-    <li class="list-group-item"><a href="#">Dry Fruits</a></li>
+    <?php foreach(get_popular_h() as $popular) : ?>
+      <li class="list-group-item"><a href="<?php echo base_url(); ?>products/details/<?php echo $popular->id; ?>"><?php echo $popular->title; ?></a></li>
+    <?php endforeach; ?>
   </ul>
 </div><!--/Most Popular panel -->
