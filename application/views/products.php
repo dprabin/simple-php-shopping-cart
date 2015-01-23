@@ -1,6 +1,13 @@
 <?php if ($this->session->flashdata('registered')) : ?>
 	<div class="alert alert-success"><?php echo $this->session->flashdata('registered');   ?></div>
 <?php endif; ?>
+<?php if ($this->session->flashdata('pass_login')) : ?>
+	<div class="alert alert-success"><?php echo $this->session->flashdata('pass_login');   ?></div>
+<?php endif; ?>
+<?php if ($this->session->flashdata('fail_login')) : ?>
+	<div class="alert alert-danger"><?php echo $this->session->flashdata('fail_login');   ?></div>
+<?php endif; ?>
+
 <div class="row"><!-- Food items here -->
 <?php foreach($products as $product) : ?>
 	<div class="col-md-4 food">
