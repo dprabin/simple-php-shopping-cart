@@ -35,7 +35,13 @@ class Cart extends CI_Controller{
 	}
 
 	//Update cart
-	public func
+	public function update($in_cart=null){
+		$data = $_POST;
+		$this->cart->update($data);
+
+		//Show cart page
+		redirect('cart','refresh');
+	}
 }
 
 ?>
