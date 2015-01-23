@@ -6,10 +6,20 @@
         <th>Description</th>
         <th style="text-align:right">Price</th>
       </tr>
+      <?php $i  = 1; ?>
+      <?php foreach ($this->cart->contents() as $items): ?>
+          <input type="hidden" name="<?php echo $i.'[rowid]'; ?>" value="<?php echo $items['rowid']; ?>" />
+          <tr>
+            <td><input type="text" name="<?php echo $i.'[qty]'; ?>" value="<?php echo $items['qty']; ?>" maxlength="2" class="sidebar-cart-qty" /></td>
+            <td class="right"><?php echo $items['name']; ?></td>
+            <td class="right" style="text-align:right">Rs.<?php echo $this->cart->format_number($items['price']); ?></td>
+          </tr>
+        <?php $i++; ?>
+      <?php endforeach; ?>
       <tr>
         <td></td>
         <td class="right"><strong>Total</strong></td>
-        <td class="right" style="text-align:right">Rs</td>
+        <td style="text-align:right"><?php echo $this->cart->format_number($this->cart->total()); ?></td>
       </tr>
     </table>
     <br />
