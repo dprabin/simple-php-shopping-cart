@@ -39,7 +39,7 @@
         <li><a href="<?php echo base_url(); ?>users/register">Create Account</a></li>
       </ul>
       <?php if(!$this->session->userdata('logged_in')) : ?>
-        <form method="post" action="<?php echo base_url(); ?>user/login" class="navbar-form navbar-right">
+        <form method="post" action="<?php echo base_url(); ?>users/login" class="navbar-form navbar-right">
           <div class="form-group">
             <input name="username" type="text" class="form-control" placeholder="Username">
           </div>
@@ -49,7 +49,7 @@
           <button name="submit" type="submit" class="btn btn-default">Login</button>
         </form>
       <?php else : ?>
-        <form method="post" action="<?php echo base_url(); ?>user/logout" class="navbar-form navbar-right">
+        <form method="post" action="<?php echo base_url(); ?>users/logout" class="navbar-form navbar-right">
           <button name="submit" type="submit" class="btn btn-default">Logout</button>
         </form>
       <?php endif; ?>
