@@ -39,7 +39,7 @@
         <?php if(!$this->session->user_data('logged_in')) : ?>
           <li><a href="<?php echo base_url(); ?>users/register">Create Account</a></li>
         <?php else : ?>
-          <li>Logged in as <?php echo $this->session->user_data('username');?></li>
+          <li>Logged in as <?php echo $this->session->user_data('username'); ?></li>
         <?php endif; ?>
       </ul>
       <?php if(!$this->session->userdata('logged_in')) : ?>
