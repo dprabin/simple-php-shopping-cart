@@ -5,7 +5,7 @@
 		<div class="food-image"><a href="<?php echo base_url(); ?>products/details/<?php echo $product->id; ?>"><img class="food-image-img" src="<?php echo base_url(); ?>assets/images/products/<?php echo $product->image; ?>" /></a></div>
 		<div class="food-title"><?php echo $product->title; ?></div>
 		<div class="food-add">
-			<form method="post" action="<php echo base_url(); ?>cart/add">
+			<form method="post" action="<?php echo base_url(); ?>cart/add">
 				QTY: <input type="text" class="qty" name="qty" value="1" /> 
 				<input type="hidden" name="item_number" value="<?php echo $product->id; ?>" />
 				<input type="hidden" name="price" value="<?php echo $product->price; ?>" />
