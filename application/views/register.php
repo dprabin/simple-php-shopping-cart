@@ -24,5 +24,5 @@
     <label>Confirm Password*</label>
     <input type="password" class="form-control" name="password2" placeholder="Confirm your password" />
   </div>
-  <button type="submit" class="btn btn-primary">Register</button>
+  <button type="submit" class="btn btn-primary" name="submit">Register</button>
 </form>
