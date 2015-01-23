@@ -33,6 +33,9 @@ class Cart extends CI_Controller{
 		//print_r($data);
 		redirect('products');
 	}
+
+	//Update cart
+	public func
 }
 
 ?>
