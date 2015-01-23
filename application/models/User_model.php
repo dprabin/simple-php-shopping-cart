@@ -20,7 +20,7 @@ class User_model extends CI_Model{
 		if($result->num_rows() == 1){
 			return $result->row(0)->id;
 		} else {
-			return flase;
+			return false;
 		}
 	}
 }
