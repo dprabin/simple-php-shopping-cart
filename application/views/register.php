@@ -1,4 +1,4 @@
-<?php echo validation_errors('<div class="alert alert-danger">','</div>');?>
+<?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
 <form method="post" action="<?php echo base_url(); ?>users/register">
   <div class="form-group">
     <label>First Name*</label>
