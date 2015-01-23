@@ -36,9 +36,9 @@
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li class="active"><a href="<?php echo base_url(); ?>">Home</a></li>
-        <li><a href="<?php echo base_url(); ?>user/register">Create Account</a></li>
+        <li><a href="<?php echo base_url(); ?>users/register">Create Account</a></li>
       </ul>
-      <form class="navbar-form navbar-right">
+      <form method="post" action="<?php echo base_url(); ?>user/login" class="navbar-form navbar-right">
         <div class="form-group">
           <input name="username" type="text" class="form-control" placeholder="Username">
         </div>
