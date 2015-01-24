@@ -8,8 +8,9 @@ class Users extends CI_Controller{
 			$data['user'] = $this->User_model->get_user_details($this->session->userdata('user_id'));
 
 			//Validation Rules
-			$this->form_validation->set_rules('password','Password', 'trim|required|max_length[50]|min_length[4]');
-			$this->form_validation->set_rules('password2','Confirm Password', 'trim|required|matches[password]');
+			//$this->form_validation->set_rules('old_password','Old Password', 'trim|required');
+			$this->form_validation->set_rules('password','New Password', 'trim|required|max_length[50]|min_length[4]');
+			$this->form_validation->set_rules('password2','Confirm new Password', 'trim|required|matches[password]');
 
 			$this->form_validation->set_rules('address','Address: Locality, Street, House number', 'trim|required|min_length[5]');
 			$this->form_validation->set_rules('address2','Address2: Directions and Placemarks', 'trim|required|min_length[4]');
