@@ -32,7 +32,7 @@ class User_model extends CI_Model{
 	}
 
 	//Update User
-	public function update($id){
+	public function update(){
 		$data = array(
 			'password' => md5($this->input->post('password')),
 			'address' => $this->input->post('address'),
@@ -44,7 +44,7 @@ class User_model extends CI_Model{
 			//'geolocation' => geoCheckIP(find_user_ip()),
 			'last_active' => date("Y-m-d H:i:s")
 			);
-		$this->db->where('id',$id);
+		$this->db->where('id',$this->session->userdata('user_id'));
 		$update = $this->db->update('users',$data);
 		return $update;
 	}
