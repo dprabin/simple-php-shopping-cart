@@ -1,3 +1,6 @@
+<?php if ($this->session->flashdata('invalid_login')) : ?>
+  <div class="alert alert-danger"><?php echo $this->session->flashdata('invalid_login');   ?></div>
+<?php endif; ?>
 <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
 <form method="post" action="<?php echo base_url(); ?>users">
   <h3><?php echo $user->first_name." ".$user->last_name; ?></h3>
@@ -10,10 +13,10 @@
   </ul>
   <hr>
   <input type="hidden" name="id" value="<?php echo $user->id; ?>">
-  <!--div class="form-group">
+  <div class="form-group">
     <label>Old Password*</label>
     <input type="password" class="form-control" name="old_password" placeholder="Enter your current password" />
-  </div-->
+  </div>
   <div class="form-group">
     <label>New Password*</label>
     <input type="password" class="form-control" name="password" placeholder="Enter your new password" />
