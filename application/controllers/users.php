@@ -1,5 +1,14 @@
 <?php
 class Users extends CI_Controller{
+
+	//Users index
+	public function index(){
+		$data['user'] = $this->User_model->get_user_details($this->session->userdata('user_id'));
+		//Load View
+		$data['main_content'] = 'user';
+		$this->load->view('layouts/main', $data);
+	}
+
 	public function register(){
 		//Validation Rules
 		$this->form_validation->set_rules('first_name','First Name', 'trim|required|min_length[2]');
