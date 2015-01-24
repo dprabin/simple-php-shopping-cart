@@ -49,6 +49,7 @@ class User_model extends CI_Model{
 		return $update;
 	}
 
+	//Returns user_id if username and password matches
 	public function login($username,$password){
 		$this->db->where('username',$username);
 		$this->db->where('password',$password);
@@ -56,6 +57,18 @@ class User_model extends CI_Model{
 		$result = $this->db->get('users');
 		if($result->num_rows() == 1){
 			return $result->row(0)->id;
+		} else {
+			return false;
+		}
+	}
+
+	//Returns true if supplied password matches with current password of current user
+	public function check_password($password){
+		$this->db->where('id',$this->session->userdata('user_id'));
+		$this->db->where('password',$password);
+		$result = $this->db->get('users');
+		if($result->num_rows() == 1){
+			return true;
 		} else {
 			return false;
 		}
