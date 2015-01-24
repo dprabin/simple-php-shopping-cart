@@ -51,7 +51,7 @@ class Product_model extends CI_Model{
 	}
 
 	//add products in cart to order
-	public function add_products_to_cart(){
+	/*public function add_products_to_cart(){
 		$data = array(
 			'address' => $this->input->post('address'),
 			'address2' => $this->input->post('address2'),
@@ -61,7 +61,7 @@ class Product_model extends CI_Model{
 			);
 		$insert = $this->db->insert('users',$data);
 		return $insert;
-	}
+	}*/
 
 }
 
