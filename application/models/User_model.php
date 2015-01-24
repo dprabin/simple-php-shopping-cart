@@ -1,5 +1,15 @@
 <?php 
 class User_model extends CI_Model{
+	//Get User details
+	public function get_user_details($id){
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where('id',$id);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
+	//Register New User
 	public function register(){
 		$data = array(
 			'first_name' => $this->input->post('first_name'),
