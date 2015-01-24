@@ -3,12 +3,36 @@ class Users extends CI_Controller{
 
 	//Users index
 	public function index(){
-		$data['user'] = $this->User_model->get_user_details($this->session->userdata('user_id'));
-		//Load View
-		$data['main_content'] = 'user';
-		$this->load->view('layouts/main', $data);
+		if ($this->session->userdata('logged_in')){
+			//Load current user data
+			$data['user'] = $this->User_model->get_user_details($this->session->userdata('user_id'));
+
+			//Validation Rules
+			$this->form_validation->set_rules('password','Password', 'trim|required|max_length[50]|min_length[4]');
+			$this->form_validation->set_rules('password2','Confirm Password', 'trim|required|matches[password]');
+
+			$this->form_validation->set_rules('address','Address: Locality, Street, House number', 'trim|required|min_length[5]');
+			$this->form_validation->set_rules('address2','Address2: Directions and Placemarks', 'trim|required|min_length[4]');
+			$this->form_validation->set_rules('phone','Phone Number', 'trim|required|min_length[6]');
+			$this->form_validation->set_rules('city','Your City', 'trim|required|min_length[3]');
+			$this->form_validation->set_rules('state','Your country or state', 'trim|required|min_length[4]');
+
+			if($this->form_validation->run() == FALSE){
+				$data['main_content'] = 'user';
+				$this->load->view('layouts/main', $data);
+			} else {
+				if($this->User_model->update()){
+					$this->session->set_flashdata('registered','Your record is updated');
+					redirect('products');
+				}
+			}
+		} else {
+			echo "Please login";
+		}
+
 	}
 
+	//Register New user
 	public function register(){
 		//Validation Rules
 		$this->form_validation->set_rules('first_name','First Name', 'trim|required|min_length[2]');
