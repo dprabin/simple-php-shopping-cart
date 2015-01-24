@@ -8,7 +8,7 @@ class Users extends CI_Controller{
 			$data['user'] = $this->User_model->get_user_details($this->session->userdata('user_id'));
 
 			//Validation Rules
-			//$this->form_validation->set_rules('old_password','Current Password', 'trim|required');
+			$this->form_validation->set_rules('old_password','Current Password', 'trim|required');
 
 			$password = md5($this->input->post('old_password'));
 			$valid_password = $this->User_model->check_password($password);
