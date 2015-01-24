@@ -24,5 +24,26 @@
     <label>Confirm Password*</label>
     <input type="password" class="form-control" name="password2" placeholder="Confirm your password" />
   </div>
+  <hr>
+  <div class="form-group">
+    <label>Address*</label>
+    <input type="text" class="form-control" name="address" placeholder="Locality, Street, House Number" />
+  </div>
+  <div class="form-group">
+    <label>Address2*</label>
+    <input type="text" class="form-control" name="address2" placeholder="Directions and placemarks" />
+  </div>
+  <div class="form-group">
+    <label>Phone Number*</label>
+    <input type="number" class="form-control" name="phone" placeholder="Mobile number or fixed phone number" />
+  </div>
+  <div class="form-group">
+    <label>City*</label>
+    <input type="text" class="form-control" name="address" placeholder="Your City" />
+  </div>
+  <div class="form-group">
+    <label>State*</label>
+    <input type="text" class="form-control" name="address" placeholder="Current country and state" />
+  </div>
   <button type="submit" class="btn btn-primary" name="submit">Register</button>
 </form>
