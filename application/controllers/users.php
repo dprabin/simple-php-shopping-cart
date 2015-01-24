@@ -51,6 +51,10 @@ class Users extends CI_Controller{
 
 			//Set Flash message, that is stored in sessions and can be used in another controller or view
 			$this->session->set_flashdata('pass_login','You are logged in');
+
+			//Update last active
+			$this->User_model->update_last_active();
+
 			redirect('products');
 		} else {
 			//set error
@@ -65,6 +69,9 @@ class Users extends CI_Controller{
 		$this->session->unset_userdata('user_id');
 		$this->session->unset_userdata('username');
 		$this->session->sess_destroy();
+
+		//Update last active
+		$this->User_model->update_last_active();
 
 		redirect('products');
 	}
