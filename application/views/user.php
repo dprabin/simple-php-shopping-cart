@@ -1,5 +1,5 @@
 <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
-<form method="post" action="<?php echo base_url(); ?>users/update">
+<form method="post" action="<?php echo base_url(); ?>users">
   <h3><?php echo $user->first_name." ".$user->last_name; ?></h3>
   <ul><li>Username: <?php echo $user->username; ?></li>
   <li>Email: <?php echo $user->email; ?></li>
@@ -10,13 +10,17 @@
   </ul>
   <hr>
   <input type="hidden" name="id" value="<?php echo $user->id; ?>">
+  <!--div class="form-group">
+    <label>Old Password*</label>
+    <input type="password" class="form-control" name="old_password" placeholder="Enter your current password" />
+  </div-->
   <div class="form-group">
-    <label>Password*</label>
-    <input type="password" class="form-control" name="password" placeholder="Enter your password" />
+    <label>New Password*</label>
+    <input type="password" class="form-control" name="password" placeholder="Enter your new password" />
   </div>
   <div class="form-group">
-    <label>Confirm Password*</label>
-    <input type="password" class="form-control" name="password2" placeholder="Confirm your password"  />
+    <label>Confirm New Password*</label>
+    <input type="password" class="form-control" name="password2" placeholder="Confirm your new password"  />
   </div>
   <hr>
   <div class="form-group">
@@ -39,5 +43,5 @@
     <label>Country/State*</label>
     <input type="text" class="form-control" name="state" placeholder="Current country and state" value="<?php echo $user->state; ?>" />
   </div>
-  <button type="submit" class="btn btn-primary" name="submit">Register</button>
+  <button type="submit" class="btn btn-primary" name="submit">Update</button>
 </form>
