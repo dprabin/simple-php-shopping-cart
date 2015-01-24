@@ -38,7 +38,6 @@ class Product_model extends CI_Model{
 		return $query->result();
 	}
 
-
 	//Get Popular Product
 	public function get_popular(){
 		$this->db->select('p.title,p.id, count(o.product_id) as total');
@@ -49,6 +48,19 @@ class Product_model extends CI_Model{
 		//$this->db->limit('5');
 		$query = $this->db->get();
 		return $query->result();
+	}
+
+	//add products in cart to order
+	public function add_products_to_cart(){
+		$data = array(
+			'address' => $this->input->post('address'),
+			'address2' => $this->input->post('address2'),
+			'phone' => $this->input->post('phone'),
+			'username' => $this->input->post('username'),
+			'password' => md5($this->input->post('password'))
+			);
+		$insert = $this->db->insert('users',$data);
+		return $insert;
 	}
 
 }
