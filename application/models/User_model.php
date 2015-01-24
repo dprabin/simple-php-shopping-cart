@@ -6,8 +6,16 @@ class User_model extends CI_Model{
 			'last_name' => $this->input->post('last_name'),
 			'email' => $this->input->post('email'),
 			'username' => $this->input->post('username'),
-			'password' => md5($this->input->post('password'))
+			'password' => md5($this->input->post('password')),
+			'address' => $this->input->post('address'),
+			'address2' => $this->input->post('address2'),
+			'phone' => $this->input->post('phone'),
+			'city' => $this->input->post('city'),
+			'state' => $this->input->post('state'),
+			//'geolocation' => $this->input->post('geolocation'),
+			'last_active' => date("Y-m-d H:i:s")
 			);
+
 		$insert = $this->db->insert('users',$data);
 		return $insert;
 	}
@@ -23,6 +31,7 @@ class User_model extends CI_Model{
 			return false;
 		}
 	}
+
 }
 
 ?>
