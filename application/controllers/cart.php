@@ -42,6 +42,23 @@ class Cart extends CI_Controller{
 		//Show cart page
 		redirect('cart','refresh');
 	}
+
+	//Process a cart
+	public function process(){
+		//Items Data
+		$data = array(
+			'address'=> $this->input->post('address'),
+			'address2' =>$this->input->post('address2'),
+			'price'=> $this->input->post('price'),
+			'phone'=> $this->input->post('phone'),
+			'city'=> $this->input->post('city'),
+			'state'=> $this->input->post('state'));
+
+		//Insert into orders
+		//$this->orders->insert($data);
+		//print_r($data);
+		redirect('products');
+	}
 }
 
 ?>
