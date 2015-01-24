@@ -23,12 +23,30 @@ class User_model extends CI_Model{
 			'city' => $this->input->post('city'),
 			'state' => $this->input->post('state'),
 			'last_logon_ip' => find_user_ip(),
-			//'geolocation' => $this->input->post('geolocation'),
+			//'geolocation' => geoCheckIP(find_user_ip()),
 			'last_active' => date("Y-m-d H:i:s")
 			);
 
 		$insert = $this->db->insert('users',$data);
 		return $insert;
+	}
+
+	//Update User
+	public function update($id){
+		$data = array(
+			'password' => md5($this->input->post('password')),
+			'address' => $this->input->post('address'),
+			'address2' => $this->input->post('address2'),
+			'phone' => $this->input->post('phone'),
+			'city' => $this->input->post('city'),
+			'state' => $this->input->post('state'),
+			'last_logon_ip' => find_user_ip(),
+			//'geolocation' => geoCheckIP(find_user_ip()),
+			'last_active' => date("Y-m-d H:i:s")
+			);
+		$this->db->where('id',$id);
+		$update = $this->db->update('users',$data);
+		return $update;
 	}
 
 	public function login($username,$password){
