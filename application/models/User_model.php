@@ -40,7 +40,7 @@ class User_model extends CI_Model{
 			'phone' => $this->input->post('phone'),
 			'city' => $this->input->post('city'),
 			'state' => $this->input->post('state'),
-			'last_logon_ip' => find_user_ip(),
+			'last_logon_ip' => $this->find_user_ip(),
 			//'geolocation' => geoCheckIP(find_user_ip()),
 			'last_active' => date("Y-m-d H:i:s")
 			);
@@ -85,7 +85,7 @@ class User_model extends CI_Model{
 
 	//Find ip address of User
 	public function find_user_ip(){
-		if ($_SERVER['HTTP_CLIENT_IP']){
+		/*if ($_SERVER['HTTP_CLIENT_IP']){
 			$ip = $_SERVER['HTTP_CLIENT_IP'];
 		} else if($_SERVER['HTTP_X_FORWARDED_FOR']){
 			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -95,7 +95,7 @@ class User_model extends CI_Model{
 			$ip = $_SERVER['HTTP_FORWARDED_FOR'];
 		} else if($_SERVER['HTTP_FORWARDED']){
 			$ip = $_SERVER['HTTP_FORWARDED'];
-		} else if($_SERVER['REMOTE_ADDR']){
+		} else */if($_SERVER['REMOTE_ADDR']){
 			$ip = $_SERVER['REMOTE_ADDR'];
 		} else {
 			$ip = 'UNKNOWN';
