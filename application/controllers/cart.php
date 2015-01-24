@@ -2,8 +2,8 @@
 class Cart extends CI_Controller{
 	
 	public $paypal_data = '';
-	public $tax;
-	public $shipping;
+	public $tax=0;
+	public $shipping=0;
 	public $total = 0;
 	public $grand_total;
 
@@ -87,13 +87,18 @@ class Cart extends CI_Controller{
 			$this->Product_model->add_order($order_data);
 
 		}
-		//Items Data
-		
 
-		//Insert into orders
-		//$this->orders->insert($data);
-		//print_r($data);
-		redirect('products');
+		//Get Grand Total
+		$this->grand_total = >$this->total+$this->tax+$this->shipping;
+
+		//Create array of costs
+		$paypal_product['assets'] = array(
+			'tax_total' => $this->tax,
+			'shipping_cost' => $this->shipping,
+			'grand_total' => $this->total);
+
+		//Session Array for Later
+		$_SESSION['paypal_products'] = $paypal_product;
 	}
 
 }
