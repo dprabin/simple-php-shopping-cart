@@ -46,7 +46,7 @@ $config['paypal_mode']         = 'sandbox'; // sandbox or live
 $config['paypal_api_username']  = 'selleremail@somesite.com'; //PayPal API Username
 $config['paypal_api_password']  = '123456'; //Paypal API password
 $config['paypal_api_signature']     = 'ZWxwchnCsdQg5PxAUjcH6OPuZK3sPcPH'; //Paypal API Signature
-$config['paypal_currency_code']     = 'NRS; //Paypal Currency Code
+$config['paypal_currency_code']     = 'NRS'; //Paypal Currency Code
 $config['paypal_return_url']    = base_url().'cart/process'; //Point to process.php page
 $config['paypal_cancel_url']    = base_url().'cart/cancel'; //Cancel URL if user clicks cancel
 
