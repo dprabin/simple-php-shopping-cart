@@ -51,8 +51,15 @@ body {
 	background: rgba(59,126,20,0.5);
 	color: #fff;
 	padding:5px;
-	font-size: 22px;
+	font-size: 10px;
+	line-height: 1em;
+	text-align: right;
 }
+.food-price-per-unit{
+	font-size: 22px !important;
+	display: inline;
+}
+
 
 .food-add{
 	margin: 5px auto 20px;
