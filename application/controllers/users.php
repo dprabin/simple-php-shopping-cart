@@ -10,12 +10,11 @@ class Users extends CI_Controller{
 			//Validation Rules
 			$this->form_validation->set_rules('old_password','Current Password', 'trim|required');
 
-			$username = $this->session->userdata('username'); //$_POST['username'];
 			$password = md5($this->input->post('new_password'));
-			$user_id = $this->User_model->login($username,$password);
+			$valid_password = $this->User_model->check_password($password);
 
 			//If password confirm, then proceed other form validation
-			if($user_id){
+			if($valid_pasword){
 				$this->form_validation->set_rules('password','New Password', 'trim|required|max_length[50]|min_length[4]');
 				$this->form_validation->set_rules('password2','Confirm new Password', 'trim|required|matches[password]');
 
