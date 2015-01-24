@@ -33,12 +33,14 @@ class User_model extends CI_Model{
 		}
 	}
 
-	//Update last active in users table on login
+	//Update last active time and ip in users table on login
 	public function update_last_active(){
 		//$this->db->update('last_active',date("Y-m-d H:i:s"));
 		//$this->db->where('id',$result->row(0)->id);
 		return false;
 	}
+
+	//I think these should be in different model
 
 	//Find ip address of User
 	public function find_user_ip(){
@@ -60,7 +62,37 @@ class User_model extends CI_Model{
 		return $ip;
 	}
 
-	//Find user Geolocation
+	//Find user Geolocation from ip address
+	public function geoCheckIP($ip){
+		//check, if the provided ip is valid
+		if(!filter_var($ip, FILTER_VALIDATE_IP)){
+			throw new InvalidArgumentException("IP is not valid");
+		}
+
+		//contact ip-server
+		$response=@file_get_contents('http://www.netip.de/search?query='.$ip);
+		if (empty($response)){
+			throw new InvalidArgumentException("Error contacting Geo-IP-Server");
+		}
+
+		//Array containing all regex-patterns necessary to extract ip-geoinfo from page
+		$patterns=array();
+		//$patterns["domain"] = '#Domain: (.*?)&nbsp;#i';
+		$patterns["country"] = '#Country: (.*?)&nbsp;#i';
+		$patterns["state"] = '#State/Region: (.*?)<br#i';
+		$patterns["town"] = '#City: (.*?)<br#i';
+
+		//Array where results will be stored
+		$ipInfo=array();
+
+		//check response from ipserver for above patterns
+		foreach ($patterns as $key => $pattern){
+			//store the result in array
+			$ipInfo[$key] = preg_match($pattern,$response,$value) && !empty($value[1]) ? $value[1] : 'not found';
+		}
+
+		return $ipInfo;
+		}
 }
 
 ?>
