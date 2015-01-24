@@ -29,6 +29,16 @@ class Product_model extends CI_Model{
 		return $query->result();
 	}
 
+	//Get items of specific category
+	public function get_category_items($category_id){
+		$this->db->select('*');
+		$this->db->from('products');
+		$this->db->where('category_id',$category_id);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+
 	//Get Popular Product
 	public function get_popular(){
 		$this->db->select('p.title,p.id, count(o.product_id) as total');
