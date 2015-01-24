@@ -1,6 +1,7 @@
 <?php if (!defined('BASEPATH')) exit ('No direct script access allowed');
 
 class Paypal{
+   /* //Constructor and global variable are not necessary as all parameters are passed to PPHttpPost() method
    public $API_USERNAME;
    public $API_PASSWORD;
    public $API_SIGNATURE;
@@ -16,14 +17,14 @@ class Paypal{
       else{
          $this->API_ENDPOINT = "https://api-3t.sandbox.paypal.com/nvp";
       }
-   }
+   }*/
  
-   function PPHttpPost($methodName_, $nvpStr_) {
-      $API_UserName = urlencode($this->API_USERNAME);
-      $API_Password = urlencode($this->API_PASSWORD);
-      $API_Signature = urlencode($this->API_SIGNATURE);
-      $API_Endpoint = $this->API_ENDPOINT;
-      $version = urlencode('51.0');
+   function PPHttpPost($methodName_, $nvpStr_,$API_USERNAME, $API_PASSWORD, $API_SIGNATURE, $API_ENDPOINT) {
+      $API_UserName = urlencode($API_USERNAME);
+      $API_Password = urlencode($API_PASSWORD);
+      $API_Signature = urlencode($API_SIGNATURE);
+      $API_Endpoint = $API_ENDPOINT;
+      $version = urlencode('109.0');
      
       // Set the curl parameters.
       $ch = curl_init();
