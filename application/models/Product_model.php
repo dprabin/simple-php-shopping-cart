@@ -51,7 +51,7 @@ class Product_model extends CI_Model{
 	}
 
 	//add products in cart to order
-	/*public function add_products_to_cart(){
+	/*public function order_products(){
 		$data = array(
 			'address' => $this->input->post('address'),
 			'address2' => $this->input->post('address2'),
