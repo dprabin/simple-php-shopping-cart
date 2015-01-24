@@ -8,7 +8,7 @@ class Users extends CI_Controller{
 			$data['user'] = $this->User_model->get_user_details($this->session->userdata('user_id'));
 
 			//Validation Rules
-			//$this->form_validation->set_rules('old_password','Old Password', 'trim|required');
+			$this->form_validation->set_rules('old_password','Current Password', 'trim|required');
 
 			$username = $this->session->userdata('username'); //$_POST['username'];
 			$password = md5($this->input->post('new_password'));
@@ -37,9 +37,11 @@ class Users extends CI_Controller{
 			} else {
 				//redirect with error message
 				$this->session->set_flashdata('invalid_login','Your current password is invalid');
-				redirect('users');
+				$data['main_content'] = 'user';
+				$this->load->view('layouts/main', $data);
 			}
 		} else {
+			$this->session->set_flashdata('registered','You need to login');
 			redirect('products');
 		}
 
