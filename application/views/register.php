@@ -38,12 +38,12 @@
     <input type="number" class="form-control" name="phone" placeholder="Mobile number or fixed phone number" />
   </div>
   <div class="form-group">
-    <label>City*</label>
-    <input type="text" class="form-control" name="address" placeholder="Your City" />
+    <label>District/City*</label>
+    <input type="text" class="form-control" name="city" placeholder="Your District, City" />
   </div>
   <div class="form-group">
-    <label>State*</label>
-    <input type="text" class="form-control" name="address" placeholder="Current country and state" />
+    <label>Country/State*</label>
+    <input type="text" class="form-control" name="state" placeholder="Current country and state" />
   </div>
   <button type="submit" class="btn btn-primary" name="submit">Register</button>
 </form>
