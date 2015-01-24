@@ -50,16 +50,10 @@ class Product_model extends CI_Model{
 		return $query->result();
 	}
 
-	//add products in cart to order
-	/*public function order_products(){
-		$data = array(
-			'address' => $this->input->post('address'),
-			'address2' => $this->input->post('address2'),
-			'phone' => $this->input->post('phone'),
-			'username' => $this->input->post('username'),
-			'password' => md5($this->input->post('password'))
-			);
-		$insert = $this->db->insert('users',$data);
+	//add order to database
+	public function add_order($order_data){
+		$insert = $this->db->insert('order',$order_data);
+		//also update last_active to orders
 		return $insert;
 	}*/
 
