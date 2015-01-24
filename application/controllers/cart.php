@@ -1,7 +1,4 @@
 <?php
-/**
-* 
-*/
 class Cart extends CI_Controller{
 	
 	public $paypal_data = '';
@@ -12,6 +9,7 @@ class Cart extends CI_Controller{
 
 	//Cart index
 	public function index(){
+		$data['user'] = $this->User_model->get_user_details($this->session->userdata('id'));
 		//Load View
 		$data['main_content'] = 'cart';
 		$this->load->view('layouts/main', $data);
