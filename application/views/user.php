@@ -12,7 +12,6 @@
   <li>last_active: <?php echo $user->last_active; ?></li>
   </ul>
   <hr>
-  <input type="hidden" name="id" value="<?php echo $user->id; ?>">
   <div class="form-group">
     <label>Old Password*</label>
     <input type="password" class="form-control" name="old_password" placeholder="Enter your current password" />
