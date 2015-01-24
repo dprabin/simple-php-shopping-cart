@@ -12,6 +12,7 @@ class User_model extends CI_Model{
 			'phone' => $this->input->post('phone'),
 			'city' => $this->input->post('city'),
 			'state' => $this->input->post('state'),
+			'last_logon_ip' => find_user_ip(),
 			//'geolocation' => $this->input->post('geolocation'),
 			'last_active' => date("Y-m-d H:i:s")
 			);
@@ -56,7 +57,6 @@ class User_model extends CI_Model{
 		} else {
 			$ip = 'UNKNOWN';
 		}
-
 		return $ip;
 	}
 
