@@ -9,6 +9,12 @@ class Users extends CI_Controller{
 		$this->form_validation->set_rules('password','Password', 'trim|required|max_length[50]|min_length[4]');
 		$this->form_validation->set_rules('password2','Confirm Password', 'trim|required|matches[password]');
 
+		$this->form_validation->set_rules('address','Address: Locality, Street, House number', 'trim|required|min_length[5]');
+		$this->form_validation->set_rules('address2','Address2: Directions and Placemarks', 'trim|required|min_length[4]');
+		$this->form_validation->set_rules('phone','Phone Number', 'trim|required|min_length[6]');
+		$this->form_validation->set_rules('city','Your City', 'trim|required|min_length[3]');
+		$this->form_validation->set_rules('state','Your country or state', 'trim|required|min_length[4]');
+
 		if($this->form_validation->run() == FALSE){
 			$data['main_content'] = 'register';
 			$this->load->view('layouts/main',$data);
