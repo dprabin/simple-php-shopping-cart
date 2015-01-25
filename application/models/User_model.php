@@ -88,13 +88,6 @@ class User_model extends CI_Model{
 		}
 	}
 
-	//Update last active time and ip in users table on login
-	public function update_last_active(){
-		//$this->db->update('last_active',date("Y-m-d H:i:s"));
-		//$this->db->where('id',$result->row(0)->id);
-		return false;
-	}
-
 	//I think these should be in different model
 
 	//Find ip address of User
