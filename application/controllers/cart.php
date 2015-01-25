@@ -62,7 +62,7 @@ class Cart extends CI_Controller{
 					'itm_name' => $product->title,
 					'itm_price' => $product->price,
 					'itm_code' => $item_id,
-					'itm_qty' => $this->input->post(item_qty'')[$key]);
+					'itm_qty' => $this->input->post('item_qty')[$key]);
 			}
 
 			//Order Data
@@ -70,13 +70,13 @@ class Cart extends CI_Controller{
 				'product_id' => $item_id,
 				'user_id' => $this->session->userdata('user_id'),
 				'transaction_id' => 0,
-				'qty'=> $this->input->post('item_qty')[$key],
-				'price'=> $subtotal;
-				'address'=> $this->input->post('address'),
-				'address2' =>$this->input->post('address2'),
-				'phone'=> $this->input->post('phone'),
-				'city'=> $this->input->post('city'),
-				'state'=> $this->input->post('state'));
+				'qty'      => $this->input->post('item_qty')[$key],
+				'price'    => $subtotal,
+				'address'  => $this->input->post('address'),
+				'address2' => $this->input->post('address2'),
+				'phone'    => $this->input->post('phone'),
+				'city'     => $this->input->post('city'),
+				'state'    => $this->input->post('state'));
 
 			//Add order data to database
 			//add_order should be in Cart_model, 
@@ -89,7 +89,7 @@ class Cart extends CI_Controller{
 		}
 
 		//Get Grand Total
-		$this->grand_total = >$this->total+$this->tax+$this->shipping;
+		$this->grand_total = $this->total+$this->tax+$this->shipping;
 
 		//Create array of costs
 		$paypal_product['assets'] = array(
