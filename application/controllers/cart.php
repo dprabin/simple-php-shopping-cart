@@ -83,19 +83,22 @@ class Cart extends CI_Controller{
 				//so put it into product model. If there are more functionality, create separate cart_model
 				$this->Product_model->add_order($order_data);
 			}
+			//update last_active
+
+			//Get Grand Total
+			$this->grand_total = $this->total + $this->tax + $this->shipping;
+
+			//Create array of costs
+			$paypal_product['assets'] = array(
+				'tax_total' => $this->tax,
+				'shipping_cost' => $this->shipping,
+				'grand_total' => $this->total);
+
+			//Session Array for Later
+			$_SESSION['paypal_products'] = $paypal_product;
 		}
 
-		//Get Grand Total
-		$this->grand_total = $this->total+$this->tax+$this->shipping;
-
-		//Create array of costs
-		$paypal_product['assets'] = array(
-			'tax_total' => $this->tax,
-			'shipping_cost' => $this->shipping,
-			'grand_total' => $this->total);
-
-		//Session Array for Later
-		$_SESSION['paypal_products'] = $paypal_product;
+		
 	}
 
 }
