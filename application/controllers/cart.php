@@ -7,11 +7,12 @@ class Cart extends CI_Controller{
 	public $total =0;
 	public $grand_total;
 
-	function __construct() {
+	/*function __construct() {
 		//Get Tax and Shipping cost from config
-		$this->tax = $this->config->item('tax');
-		$this->shipping = $this->config->item('shipping');
-	}
+		//$this->config->load('config');
+		$this->tax = config_item('tax'); //$this->config->item('tax');
+		$this->shipping = config_item('shipping'); //$this->config->item('shipping');
+	}*/
 
 	//Cart index
 	public function index(){
@@ -49,6 +50,10 @@ class Cart extends CI_Controller{
 
 	//Process a cart
 	public function process(){
+		//moved this to constructor
+		$this->tax = $this->config->item('tax');
+		$this->shipping = $this->config->item('shipping');
+
 		if($_POST) {
 			foreach ($this->input->post('item_name') as $key => $value) {
 				$item_id = $this->input->post('item_code')[$key];
@@ -90,23 +95,11 @@ class Cart extends CI_Controller{
 				$this->Product_model->add_order($order_data);
 			}
 			//update last_active
+			$this->User_model->update_last_active();
 
-			//Get Grand Total
-			$this->grand_total = $this->total + $this->tax + $this->shipping;
-
-			//Create array of costs
-			$paypal_product['assets'] = array(
-				'tax_total' => $this->tax,
-				'shipping_cost' => $this->shipping,
-				'grand_total' => $this->total);
-
-			//Session Array for Later
-			$_SESSION['paypal_products'] = $paypal_product;
+			//Paypal checkout code here
 		}
-
-		
 	}
-
 }
 
 ?>
