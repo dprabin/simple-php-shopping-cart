@@ -55,7 +55,7 @@ class Cart extends CI_Controller{
 				$this->paypal_data .= '&L_PAYMENTREQUEST_0_QTY'.$key.'='.urlencode($this->input->post('item_qty')[$key]);
 
 				//Price x quantity
-				$subtotal = ($product->price + $this->input->post('item_qty')[$key]);
+				$subtotal = ($product->price * $this->input->post('item_qty')[$key]);
 				$this->total = $this->total + $subtotal;
 
 				$paypal_product['items'][] = array(
