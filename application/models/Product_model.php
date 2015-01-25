@@ -52,8 +52,12 @@ class Product_model extends CI_Model{
 
 	//add order to database
 	public function add_order($order_data){
-		$insert = $this->db->insert('order',$order_data);
 		//also update last_active to orders
+		$data = array('last_active','PDATE `current_timestamp');
+		$this->db->where('id',$this->session->userdata('user_id'));
+		$this->db->update('users',$data);
+		//Insert order data to db and return
+		$insert = $this->db->insert('order',$order_data);
 		return $insert;
 	}*/
 
