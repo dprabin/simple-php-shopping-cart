@@ -63,29 +63,26 @@ class Cart extends CI_Controller{
 					'itm_price' => $product->price,
 					'itm_code' => $item_id,
 					'itm_qty' => $this->input->post('item_qty')[$key]);
+	
+
+				//Order Data
+				$order_data = array(
+					'product_id' => $item_id,
+					'user_id' => $this->session->userdata('user_id'),
+					'transaction_id' => 0,
+					'qty'      => $this->input->post('item_qty')[$key],
+					'price'    => $subtotal,
+					'address'  => $this->input->post('address'),
+					'address2' => $this->input->post('address2'),
+					'phone'    => $this->input->post('phone'),
+					'city'     => $this->input->post('city'),
+					'state'    => $this->input->post('state'));
+
+				//Add order data to database 
+				//add_order should be in Cart_model, but it contains only one function
+				//so put it into product model. If there are more functionality, create separate cart_model
+				$this->Product_model->add_order($order_data);
 			}
-
-			//Order Data
-			$order_data = array(
-				'product_id' => $item_id,
-				'user_id' => $this->session->userdata('user_id'),
-				'transaction_id' => 0,
-				'qty'      => $this->input->post('item_qty')[$key],
-				'price'    => $subtotal,
-				'address'  => $this->input->post('address'),
-				'address2' => $this->input->post('address2'),
-				'phone'    => $this->input->post('phone'),
-				'city'     => $this->input->post('city'),
-				'state'    => $this->input->post('state'));
-
-			//Add order data to database
-			//add_order should be in Cart_model, 
-			//but it contains only one function
-			//so put it into product model.
-			//it there are more functionality, 
-			//create separate cart_model
-			$this->Product_model->add_order($order_data);
-
 		}
 
 		//Get Grand Total
