@@ -46,7 +46,7 @@ class Cart extends CI_Controller{
 		if($_POST) {
 			foreach ($this->input->post('item_name') as $key => $value) {
 				$item_id = $this->input->post('item_code')[$key];
-				$product = $this->Product_model->get_product_details('item_id');
+				$product = $this->Product_model->get_product_details($item_id);
 
 				//Paypal data
 				$this->paypal_data .= '&L_PAYMENTREQUEST_0_NAME'.$key.'='.urlencode($product->title);
