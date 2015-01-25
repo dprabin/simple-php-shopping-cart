@@ -2,10 +2,16 @@
 class Cart extends CI_Controller{
 	
 	public $paypal_data = '';
-	public $tax=0;
-	public $shipping=0;
-	public $total = 0;
+	public $tax;
+	public $shipping;
+	public $total =0;
 	public $grand_total;
+
+	function __construct() {
+		//Get Tax and Shipping cost from config
+		$this->tax = $this->config->item('tax');
+		$this->shipping = $this->config->item('shipping');
+	}
 
 	//Cart index
 	public function index(){
