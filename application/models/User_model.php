@@ -49,6 +49,20 @@ class User_model extends CI_Model{
 		return $update;
 	}
 
+	//update  last_active in users table 
+	public function update_last_active(){
+		//$data = array('last_active' => date("Y-m-d H:i:s"));
+		//$this->db->where('id',$this->session->userdata('user_id'));
+		//$this->db->update('users',$data);
+		if ($this->session->userdata('logged_in')){
+			$q = "UPDATE users SET last_active = DATE_ADD(NOW(), INTERVAL 1 MINUTE) WHERE id = '".$this->session->userdata('user_id')."'";
+			$this->db->query($q);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	//Returns user_id if username and password matches
 	public function login($username,$password){
 		$this->db->where('username',$username);
