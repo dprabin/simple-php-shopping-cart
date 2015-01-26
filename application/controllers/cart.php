@@ -92,7 +92,7 @@ class Cart extends CI_Controller{
 				//Add order data to database 
 				//add_order should be in Cart_model, but it contains only one function
 				//so put it into product model. If there are more functionality, create separate cart_model
-				$this->Product_model->add_order($order_data);
+				$this->Cart_model->add_order($order_data);
 			}
 			//update last_active
 			$this->User_model->update_last_active();
