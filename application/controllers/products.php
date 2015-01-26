@@ -11,6 +11,7 @@ class Products extends CI_Controller{
         $this->load->view('layouts/main',$data);
     }
 
+    //Display the detail information of a product
     public function details($id){
     	//Get Product Details
     	$data['product'] = $this->Product_model->get_product_details($id);
@@ -20,6 +21,32 @@ class Products extends CI_Controller{
         //load product view
         $this->load->view('layouts/main',$data);
     }
+
+    //Add a product to the system
+    public function add(){
+        //Get All Products
+        $data['products'] = $this->Product_model->get_products();
+        //Load View
+        //Define the main content area as products view (product.php)
+        $data['main_content'] = 'products';
+        //load product view
+        $this->load->view('layouts/main',$data);
+    }
+
+    //Display the detail information of a product
+    public function edit($id){
+        //If logged in as administrator, add product 
+        //otherwise redirect to details/id
+        $data['product'] = $this->Product_model->get_product_details($id);
+        if($this->session->userdata('previllege')=='admin'){
+            $data['main_content'] = 'edit';
+            $this->load->view('layouts/main',$data);
+        } else {
+            $data['main_content'] = 'details';
+            $this->load->view('layouts/main',$data);
+        }
+    }
+
 
     //Category viewer
     public function category($id){
