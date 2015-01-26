@@ -4,6 +4,7 @@
 <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
 
 <form method="post" action="products/edit">
+	<input type="hidden" name="product_id" value="<?php echo $product->id; ?>">
 	<div class="form-group">
 		<label>Product Title</label>
 		<input type="text" name="title" value="<?php echo $product->title; ?>" class="form-control" />
@@ -12,7 +13,7 @@
 		<label>Product Category</label>
 		<select name="category_id">
 			<?php foreach(get_categories_h() as $category) : ?>
-				<option value="<?php echo $category->id; ?>"><?php echo $category->name; ?></option>
+				<option value="<?php echo $category->id; ?>" <?php echo $product->category_id == $category->id ? 'selected="selected"' : ''; ?> ><?php echo $category->name; ?></option>
 			<?php endforeach; ?>
 		</select>
 	</div>
