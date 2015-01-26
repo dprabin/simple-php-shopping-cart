@@ -83,14 +83,14 @@ class Products extends CI_Controller{
                 $data['main_content'] = 'add';
                 $this->load->view('layouts/main',$data);
             } else {
-                /* Add new product
-                if($this->Product_model->add()){
+                //Add new product
+                if($this->Product_model->add_product()){
                     $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is updated');
                     redirect('products');
                 } else {
                     $this->session->set_flashdata('action_unsuccessful','The product '.$this->input->post('title').' is not updated');
                     redirect('products');
-                }*/
+                }
                 redirect('users');
             }
         } else {
