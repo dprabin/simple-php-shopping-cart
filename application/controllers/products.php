@@ -22,17 +22,6 @@ class Products extends CI_Controller{
         $this->load->view('layouts/main',$data);
     }
 
-    //Add a product to the system
-    public function add(){
-        //Get All Products
-        $data['products'] = $this->Product_model->get_products();
-        //Load View
-        //Define the main content area as products view (product.php)
-        $data['main_content'] = 'products';
-        //load product view
-        $this->load->view('layouts/main',$data);
-    }
-
     //Display the detail information of a product
     public function edit($id){
         //If logged in as administrator, edit product 
@@ -80,36 +69,29 @@ class Products extends CI_Controller{
 
     //Add a new product
     public function add(){
-        //If logged in as administrator, edit product 
-        //otherwise redirect to details/id
         if ($this->session->userdata('previllege')=='admin'){
-            if($_POST){
-                //Validate data
-                $this->form_validation->set_rules('title','Username', 'trim|required|max_length[200]|min_length[3]');
-                $this->form_validation->set_rules('category_id','Category', 'trim|required');
-                $this->form_validation->set_rules('description','Product Description', 'trim|required|min_length[10]');
-                $this->form_validation->set_rules('nutritional_value','Nutritional Value', 'trim');
-                $this->form_validation->set_rules('image','Product Image', 'trim|required|max_length[200]|min_length[5]');
-                $this->form_validation->set_rules('price','Product Price', 'trim|required|max_length[7]|min_length[1]');
-                $this->form_validation->set_rules('unit','Unit of product', 'trim|required|max_length[25]|min_length[1]');
-                //Read the product details from input form                    
+            //Validate data
+            $this->form_validation->set_rules('title','Username', 'trim|required|max_length[200]|min_length[3]');
+            $this->form_validation->set_rules('category_id','Category', 'trim|required');
+            $this->form_validation->set_rules('description','Product Description', 'trim|required|min_length[10]');
+            $this->form_validation->set_rules('nutritional_value','Nutritional Value', 'trim');
+            $this->form_validation->set_rules('image','Product Image', 'trim|required|max_length[200]|min_length[5]');
+            $this->form_validation->set_rules('price','Product Price', 'trim|required|max_length[7]|min_length[1]');
+            $this->form_validation->set_rules('unit','Unit of product', 'trim|required|max_length[25]|min_length[1]');
 
-                if($this->form_validation->run() == FALSE){
-                    $data['main_content'] = 'add';
-                    $this->load->view('layouts/main',$data);
-                } else {
-                    /*/Add new product
-                    if($this->Product_model->add()){
-                        $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is updated');
-                        redirect('products');
-                    } else {
-                        $this->session->set_flashdata('action_unsuccessful','The product '.$this->input->post('title').' is not updated');
-                        redirect('products');
-                    }*/
-                }
-            } else {
+            if($this->form_validation->run() == FALSE){
                 $data['main_content'] = 'add';
                 $this->load->view('layouts/main',$data);
+            } else {
+                /* Add new product
+                if($this->Product_model->add()){
+                    $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is updated');
+                    redirect('products');
+                } else {
+                    $this->session->set_flashdata('action_unsuccessful','The product '.$this->input->post('title').' is not updated');
+                    redirect('products');
+                }*/
+                redirect('users');
             }
         } else {
             $this->session->set_flashdata('action_unsuccessful','You do not have previllege to add new product');
