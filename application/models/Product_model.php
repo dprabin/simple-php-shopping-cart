@@ -83,13 +83,6 @@ class Product_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
-
-	//add order to database
-	public function add_order($order_data){
-		//Insert order data to db and return
-		$insert = $this->db->insert('orders',$order_data);
-		return $insert;
-	}
 }
 
 ?>
