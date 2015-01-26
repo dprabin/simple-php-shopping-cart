@@ -75,7 +75,6 @@ class Cart extends CI_Controller{
 					'itm_code' => $item_id,
 					'itm_qty' => $this->input->post('item_qty')[$key]);
 	
-
 				//Order Data
 				$order_data = array(
 					'product_id' => $item_id,
@@ -90,8 +89,6 @@ class Cart extends CI_Controller{
 					'state'    => $this->input->post('state'));
 
 				//Add order data to database 
-				//add_order should be in Cart_model, but it contains only one function
-				//so put it into product model. If there are more functionality, create separate cart_model
 				$this->Cart_model->add_order($order_data);
 			}
 			//update last_active
