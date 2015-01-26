@@ -50,6 +50,11 @@ class Product_model extends CI_Model{
 		return $insert;
 	}
 
+	//Remove product
+	public function remove_product($id){
+		//return $this>db->delete('id',$id);
+	}
+
 	//Get Categories
 	public function get_categories(){
 		$this->db->select('*');
