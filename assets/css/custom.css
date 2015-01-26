@@ -124,38 +124,21 @@ body {
 	vertical-align: middle;
 }
 
- /*
-  *end of details.php view
-  */
+/*
+ * end of details.php view
+ */
 
 
 
-  /*
-   * Sidebar
-   */
-
- .sidebar-cart-qty{
+/*
+ * Sidebar
+ */
+.sidebar-cart-qty{
 	width: 40px;
 	color: #666 !important;
 	text-align: center;
 	margin-bottom: 5px;
 }
- /*
-   * /Sidebar
-   */
-
-
- /*
-  * edit products
-  *
-
-textarea {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	width: 100%;
-}
-
 /*
- * /edit products
- */
+  * /Sidebar
+  */
