@@ -99,6 +99,14 @@ class Products extends CI_Controller{
         }
     }
 
+    //Remove Product form database
+    public function remove($id){
+        if ($this->session->userdata('previllege')=='admin'){
+            //Confirm before removing product
+            
+        }
+    }
+
     //Category viewer
     public function category($id){
         //Get details
