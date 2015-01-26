@@ -41,7 +41,7 @@
         <?php else : ?>
           <li><a href="<?php echo base_url(); ?>users">Logged in as <?php echo $this->session->userdata('username'); ?></a></li>
         <?php endif; ?>
-        <?php if($this->session->userdata('previllege'=='admin')) : ?>
+        <?php if($this->session->userdata('previllege')=='admin') : ?>
           <li><a href="<?php echo base_url(); ?>products/add">Add Product</a></li>
         <?php endif; ?>
 
