@@ -3,7 +3,7 @@
 <?php endif; ?>
 <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
 
-<form method="post" action="products/edit">
+<form method="post" action="<?php echo base_url(); ?>products/edit">
 	<input type="hidden" name="product_id" value="<?php echo $product->id; ?>">
 	<div class="form-group">
 		<label>Product Title</label>
