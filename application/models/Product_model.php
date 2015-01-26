@@ -52,7 +52,12 @@ class Product_model extends CI_Model{
 
 	//Remove product
 	public function remove_product($id){
-		//return $this>db->delete('id',$id);
+		//Delete from products
+		//$data=array('id'=>$id);
+		//return $this>db->delete('products',$data);
+		//set deleted
+		//$data2=array('product_id'=>$id);
+		//return $this->db->update('order',$data2);
 	}
 
 	//Get Categories
