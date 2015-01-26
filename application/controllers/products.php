@@ -35,18 +35,21 @@ class Products extends CI_Controller{
 
     //Display the detail information of a product
     public function edit($id){
-        //If logged in as administrator, add product 
+        //If logged in as administrator, edit product 
         //otherwise redirect to details/id
-        $data['product'] = $this->Product_model->get_product_details($id);
-        if($this->session->userdata('previllege')=='admin'){
-            $data['main_content'] = 'edit';
-            $this->load->view('layouts/main',$data);
+        if ($this->session->userdata('previllege')=='admin'){
+            $data['product'] = $this->Product_model->get_product_details($id);
+            if($this->session->userdata('previllege')=='admin'){
+                $data['main_content'] = 'edit';
+                $this->load->view('layouts/main',$data);
+            } else {
+                redirect('products');
+            }
         } else {
-            $data['main_content'] = 'details';
-            $this->load->view('layouts/main',$data);
+            $this->session->set_flashdata('action_successful','You do not have previllege to Edit products');
+            redirect('products');
         }
     }
-
 
     //Category viewer
     public function category($id){
