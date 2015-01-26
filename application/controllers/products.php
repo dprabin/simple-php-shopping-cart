@@ -103,7 +103,10 @@ class Products extends CI_Controller{
     public function remove($id){
         if ($this->session->userdata('previllege')=='admin'){
             //Confirm before removing product
+            $this->Product_model->remove_product($id);
 
+            $this->session->set_flashdata('action_successful','The product is successfully deleted');
+            redirect('products');
         }
     }
 
