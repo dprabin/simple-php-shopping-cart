@@ -90,6 +90,7 @@ class Users extends CI_Controller{
 			//Create array of user data
 			$data = array(
 				'user_id' => $user_id,
+				'previllege' => $this->User_model->get_user_details($user_id)->previllege,
 				'username' => $username,
 				'logged_in' => true );
 
