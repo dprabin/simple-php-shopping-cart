@@ -1,5 +1,5 @@
-<?php if ($this->session->flashdata('invalid_login')) : ?>
-  <div class="alert alert-danger"><?php echo $this->session->flashdata('invalid_login');   ?></div>
+<?php if ($this->session->flashdata('action_unsuccessful')) : ?>
+  <div class="alert alert-danger"><?php echo $this->session->flashdata('action_unsuccessful');   ?></div>
 <?php endif; ?>
 <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
 <form method="post" action="<?php echo base_url(); ?>users">
