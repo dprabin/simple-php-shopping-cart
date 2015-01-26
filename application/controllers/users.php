@@ -29,18 +29,18 @@ class Users extends CI_Controller{
 					$this->load->view('layouts/main', $data);
 				} else {
 					if($this->User_model->update()){
-						$this->session->set_flashdata('registered','Your record is updated');
+						$this->session->set_flashdata('action_successful','Your record is updated');
 						redirect('products');
 					}
 				}
 			} else {
 				//redirect with error message
-				$this->session->set_flashdata('invalid_login','Your current password is invalid');
+				$this->session->set_flashdata('action_unsuccessful','Your current password is invalid');
 				$data['main_content'] = 'user';
 				$this->load->view('layouts/main', $data);
 			}
 		} else {
-			$this->session->set_flashdata('registered','You need to login');
+			$this->session->set_flashdata('action_successful','You need to login');
 			redirect('products');
 		}
 
@@ -67,7 +67,7 @@ class Users extends CI_Controller{
 			$this->load->view('layouts/main',$data);
 		} else {
 			if($this->User_model->register()){
-				$this->session->set_flashdata('registered','You are now registered and can login');//flashdata in ci can be used in new view also
+				$this->session->set_flashdata('action_successful','You are now registered and can login');//flashdata in ci can be used in new view also
 				redirect('products');
 			}
 		}
@@ -98,7 +98,7 @@ class Users extends CI_Controller{
 			$this->session->set_userdata($data);
 
 			//Set Flash message, that is stored in sessions and can be used in another controller or view
-			$this->session->set_flashdata('pass_login','You are logged in');
+			$this->session->set_flashdata('action_successful','You are logged in');
 
 			//Update last active
 			$this->User_model->update_last_active();
@@ -106,7 +106,7 @@ class Users extends CI_Controller{
 			redirect('products');
 		} else {
 			//set error
-			$this->session->set_flashdata('fail_login', 'Sorry, the login information was not correct');
+			$this->session->set_flashdata('action_unsuccessful', 'Sorry, the login information was not correct');
 			redirect('products');
 		}
 	}
