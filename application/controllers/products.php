@@ -103,7 +103,7 @@ class Products extends CI_Controller{
     public function remove($id){
         if ($this->session->userdata('previllege')=='admin'){
             //Confirm before removing product
-            
+
         }
     }
 
