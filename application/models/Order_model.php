@@ -9,6 +9,7 @@ class Order_model extends CI_Model{
 		$this->db->join('products as p','o.product_id=p.id','inner');
 		$this->db->join('users as u','o.user_id=u.id','inner');
 		$this->db->where($fieldname,$fieldvalue);
+		$this->db->order_by('timestamp','desc');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -21,6 +22,7 @@ class Order_model extends CI_Model{
 		$this->db->join('users as u','o.user_id=u.id','inner');
 		$this->db->group_by($fieldname);
 		$this->db->where('o.status !=','canceled'); //not including canceled order
+		$this->db->order_by('timestamp','desc');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -31,6 +33,7 @@ class Order_model extends CI_Model{
 		$this->db->from('orders as o');
 		$this->db->join('products as p','o.product_id=p.id','inner');
 		$this->db->join('users as u','o.user_id=u.id','inner');
+		$this->db->order_by('timestamp','desc');
 		$query = $this->db->get();
 		return $query->result();
 	}
