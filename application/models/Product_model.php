@@ -35,7 +35,6 @@ class Product_model extends CI_Model{
 		$this->db->from('categories as c');
 		$this->db->join('products as p','c.id=p.category_id','inner');
 		$this->db->group_by('c.id');
-		$this->db->where($fieldname,$fieldvalue);
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -77,14 +76,6 @@ class Product_model extends CI_Model{
 		//set deleted
 		//$data2=array('product_id'=>$id);
 		//return $this->db->update('order',$data2);
-	}
-
-	//Get Categories
-	public function get_categories(){
-		$this->db->select('*');
-		$this->db->from('categories');
-		$query = $this->db->get();
-		return $query->result();
 	}
 
 	//Get items of specific category
