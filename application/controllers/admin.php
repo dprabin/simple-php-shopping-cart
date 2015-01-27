@@ -95,9 +95,9 @@ class Admin extends CI_Controller{
 	//Categories
 
 	public function categories(){
-		$data['report_title'] = 'Categories';
-		$data['products'] = $this->Product_model->get_categories();
-		$data['main_content'] = 'reports/report_products';
+		$data['report_title'] = 'All categories with product count';
+		$data['categories'] = $this->Product_model->get_categories();
+		$data['main_content'] = 'reports/report_all_categories';
 		$this->load->view('layouts/main',$data);
 	}
 }
