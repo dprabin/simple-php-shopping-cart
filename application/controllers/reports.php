@@ -80,14 +80,14 @@ class Reports extends CI_Controller{
 	}
 
 	public function products_by_category($category=null){
-		if(!empty($product_id)){
+		if(!empty($category)){
 			$data['report_title'] = 'Product by category: '.$category;
-			$data['products'] = $this->Product_model->get_products_by('category_name',$category); //if no data returned, redirect with message
+			$data['products'] = $this->Product_model->get_products_by('name',$category); //if no data returned, redirect with message
 			$data['main_content'] = 'reports/report_products';
 			$this->load->view('layouts/main',$data);
 		} else {
 			$this->session->set_flashdata('action_unsuccessful','You didnt supply the category name, displaying index page');
-			redirect('reports');
+			redirect('reports/all_products');
 		}
 	}
 }
