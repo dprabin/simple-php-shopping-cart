@@ -32,7 +32,7 @@ class Order_model extends CI_Model{
 		$this->db->join('products as p','o.product_id=p.id','inner');
 		$this->db->join('users as u','o.user_id=u.id','inner');
 		$query = $this->db->get();
-		$return $query->results();
+		return $query->results();
 	}
 
 	//Get order by id
