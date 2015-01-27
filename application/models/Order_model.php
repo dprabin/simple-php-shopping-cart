@@ -4,7 +4,7 @@ class Order_model extends CI_Model{
 
 	//Generic method to get orders by any field and value
 	public function get_orders_by($fieldname,$fieldvalue){
-		$this->db->select('o.*,p.title,u.username,concat(u.first_name," ",u.last_name) as fullname, u.phone,concat(o.address," ",o.address2," ",o.city," ",o.state) as fulladdress ');
+		$this->db->select('o.*,p.title,u.username,concat(u.first_name," ",u.last_name) as fullname, u.phone,concat(o.address," ",o.address2," ",o.city," ",o.state) as fulladdress ', FALSE);
 		$this->db->from('orders as o');
 		$this->db->join('products as p','o.product_id=p.id','inner');
 		$this->db->join('users as u','o.user_id=u.id','inner');
