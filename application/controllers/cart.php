@@ -95,6 +95,9 @@ class Cart extends CI_Controller{
 			$this->User_model->update_last_active();
 
 			//Paypal checkout code here
+
+			//Redirect to products at last
+			redirect('products');
 		}
 	}
 }
