@@ -17,11 +17,4 @@
 		<?php endforeach; ?>
 	</table>
 	<br />
-	<ul>
-		<li><a href="<?php echo base_url(); ?>reports/all_orders">All Orders list</a></li>
-		<li><a href="<?php echo base_url(); ?>reports/orders_by_status/pending">Pending Orders</a></li>
-		<li><a href="<?php echo base_url(); ?>reports/orders_by_status/Settled">Settled Orders</a></li>
-		<li><a href="<?php echo base_url(); ?>reports/orders_by_status/delivered">Delivered Orders</a></li>
-		<li><a href="<?php echo base_url(); ?>reports/orders_by_status/canceled">Canceled Orders</a></li>
-	</ul>
 </div>
