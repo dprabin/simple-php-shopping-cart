@@ -36,6 +36,7 @@ class Reports extends CI_Controller{
 			$this->load->model('Order_model');
 			$data['report_title'] = ucwords($status).' Orders';
 			$data['orders'] = $this->Order_model->get_orders_by('status',$status);
+			$data['total'] = $this->Order_model->get_total_by('status');
 			$data['main_content'] = 'reports/report_orders';
 			$this->load->view('layouts/main',$data);
 		} else {
