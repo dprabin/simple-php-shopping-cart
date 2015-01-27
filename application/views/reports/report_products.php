@@ -6,7 +6,7 @@
 			<tr>
 				<td><?php echo $product->id; ?></td>
 				<td><a href="<?php echo base_url(); ?>products/edit/<?php echo $product->id; ?>"><?php echo $product->title; ?></a></td>
-				<td><a href="<?php echo base_url(); ?>reports/products_by_category/<?php echo $product->name; ?>"><?php echo $product->name; ?></a></td>
+				<td><a href="<?php echo base_url(); ?>admin/products_by_category/<?php echo $product->name; ?>"><?php echo $product->name; ?></a></td>
 				<td><?php echo $product->price; ?></td>
 				<td><?php echo $product->unit; ?></td>
 				<td><?php echo $product->image; ?></td>
