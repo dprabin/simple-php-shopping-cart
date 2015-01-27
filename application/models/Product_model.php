@@ -3,8 +3,9 @@ class Product_model extends CI_Model{
 
 	//Get all products
 	public function get_products(){
-		$this->db->select('*');
-		$this->db->from('products');
+		$this->db->select('p.*, c.name');
+		$this->db->from('products as p');
+		$this->db->join('categories as c','p.category_id=c.id','inner');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -16,6 +17,17 @@ class Product_model extends CI_Model{
 		$this->db->where('id',$id);
 		$query = $this->db->get();
 		return $query->row();
+	}
+
+	//Generic method to get products by any field and value
+	public function get_products_by($fieldname,$fieldvalue){
+		$this->db->select('p.*,c.name as category_name');
+		$this->db->from('products as p');
+		$this->db->join('categories as c','c.id=p.category_id','inner');
+		$this->db->where($fieldname,$fieldvalue);
+		$this->db->order_by('timestamp','desc');
+		$query = $this->db->get();
+		return $query->result();
 	}
 
 	//Update products
