@@ -2,9 +2,7 @@
 
 class Order_model extends CI_Model{
 
-	//the status can be (1) pending, (2) delivered, (3) settled, (4) canceled
-	//Changed this to generic method to get orders by any field with given value
-	//instead of writing several methods
+	//Generic method to get orders by any field and value
 	public function get_orders_by($fieldname,$fieldvalue){
 		$this->db->select('o.*,p.title,u.name');
 		$this->db->from('orders as o');
