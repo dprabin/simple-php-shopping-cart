@@ -43,7 +43,7 @@ class Order_model extends CI_Model{
 		$this->db->join('users as u','o.user_id=u.id','inner');
 		$this->db->where('id',$id);
 		$query = $this->db->get();
-		$return $query->row();
+		return $query->row();
 	}
 	
 }
