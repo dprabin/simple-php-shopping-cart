@@ -29,6 +29,17 @@ class Product_model extends CI_Model{
 		return $query->result();
 	}
 
+	//Get Categories
+	public function get_categories(){
+		$this->db->select('c.*,count(p.id) as product_count',false); //false will escape characters
+		$this->db->from('categories as c');
+		$this->db->join('products as p','c.id=p.category_id','inner');
+		$this->db->group_by('c.id');
+		$this->db->where($fieldname,$fieldvalue);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 	//Update products
 	public function update(){
 		$data = array(
