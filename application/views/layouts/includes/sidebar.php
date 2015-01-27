@@ -51,3 +51,19 @@
     <?php endforeach; ?>
   </ul>
 </div><!--/Most Popular panel -->
+
+<!-- Only visible to admin -->
+<?php if($this->session->userdata('previllege') == 'admin') :?>
+<div class="panel panel-default panel-list"><!-- Most Popular panel -->
+  <div class="panel-heading panel-heading-dark">
+    <h3 class="panel-title">Reports</h3>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item"><a href="<?php echo base_url(); ?>reports/all_orders">All Order Items</a></li>
+    <li class="list-group-item"><a href="<?php echo base_url(); ?>reports/orders_by_status/pending">Pending Orders</a></li>
+    <li class="list-group-item"><a href="<?php echo base_url(); ?>reports/orders_by_status/Settled">Settled Orders</a></li>
+    <li class="list-group-item"><a href="<?php echo base_url(); ?>reports/orders_by_status/delivered">Delivered Orders</a></li>
+    <li class="list-group-item"><a href="<?php echo base_url(); ?>reports/orders_by_status/canceled">Canceled Orders</a></li>
+  </ul>
+</div><!--/Most Popular panel -->
+<?php endif; ?>
