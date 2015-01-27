@@ -5,8 +5,9 @@
       <h3 class="panel-title">Products</h3>
     </div>
     <ul class="list-group">
-      <li class="list-group-item"><a href="<?php echo base_url(); ?>reports/all_products">All Products</a></li>
-      <li class="list-group-item"><a href="<?php echo base_url(); ?>reports/products_by_category/pending">Product by Category</a></li>
+      <li class="list-group-item"><a href="<?php echo base_url(); ?>admin/all_products">All Products</a></li>
+      <li class="list-group-item"><a href="<?php echo base_url(); ?>admin/products_by_category">Product by Category</a></li>
+      <li class="list-group-item"><a href="<?php echo base_url(); ?>admin/categories">Categories</a></li>
     </ul>
   </div><!--/Products -->
 
@@ -15,8 +16,8 @@
       <h3 class="panel-title">Order Reports</h3>
     </div>
     <ul class="list-group">
-      <li class="list-group-item"><a href="<?php echo base_url(); ?>reports/all_orders">All Order Items</a></li>
-      <li class="list-group-item"><a href="<?php echo base_url(); ?>reports/orders_by_status/pending">Pending Orders</a></li>
+      <li class="list-group-item"><a href="<?php echo base_url(); ?>admin/all_orders">All Order Items</a></li>
+      <li class="list-group-item"><a href="<?php echo base_url(); ?>admin/orders_by_status/pending">Pending Orders</a></li>
     </ul>
   </div><!--/Order Report -->
 
