@@ -81,3 +81,10 @@
             <h3 class="panel-title">The Sasto Ramro Food Place</h3>
           </div>
           <div class="panel-body">
+
+          <?php if ($this->session->flashdata('action_successful')) : ?>
+            <div class="alert alert-success"><?php echo $this->session->flashdata('action_successful');   ?></div>
+          <?php endif; ?>
+          <?php if ($this->session->flashdata('action_unsuccessful')) : ?>
+            <div class="alert alert-danger"><?php echo $this->session->flashdata('action_unsuccessful');   ?></div>
+          <?php endif; ?>
