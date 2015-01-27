@@ -21,11 +21,10 @@ class Product_model extends CI_Model{
 
 	//Generic method to get products by any field and value
 	public function get_products_by($fieldname,$fieldvalue){
-		$this->db->select('p.*,c.name as category_name');
+		$this->db->select('p.*,c.name',false); //false will escape characters
 		$this->db->from('products as p');
 		$this->db->join('categories as c','c.id=p.category_id','inner');
 		$this->db->where($fieldname,$fieldvalue);
-		$this->db->order_by('timestamp','desc');
 		$query = $this->db->get();
 		return $query->result();
 	}
