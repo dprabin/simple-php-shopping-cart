@@ -86,12 +86,11 @@ class Products extends CI_Controller{
                 //Add new product
                 if($this->Product_model->add_product()){
                     $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is updated');
-                    redirect('products');
+                    redirect('products/details/<?php echo $this->db->insert_id(); ?>');
                 } else {
                     $this->session->set_flashdata('action_unsuccessful','The product '.$this->input->post('title').' is not updated');
                     redirect('products');
                 }
-                redirect('users');
             }
         } else {
             $this->session->set_flashdata('action_unsuccessful','You do not have previllege to add new product');
