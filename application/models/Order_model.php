@@ -27,7 +27,7 @@ class Order_model extends CI_Model{
 
 	//Get list of all orders in database
 	public function get_orders(){
-		$this->db->select('o.*,p.title,u.username');
+		$this->db->select('o.*,p.title,u.username,concat(u.first_name," ",u.last_name) as fullname, u.phone,concat(o.address," ",o.address2," ",o.city," ",o.state) as fulladdress ', FALSE);
 		$this->db->from('orders as o');
 		$this->db->join('products as p','o.product_id=p.id','inner');
 		$this->db->join('users as u','o.user_id=u.id','inner');
@@ -37,7 +37,7 @@ class Order_model extends CI_Model{
 
 	//Get order by id
 	public function get_order_by_id($id){
-		$this->db->select('o.*,p.title,u.name');
+		$this->db->select('o.*,p.title,u.username,concat(u.first_name," ",u.last_name) as fullname, u.phone,concat(o.address," ",o.address2," ",o.city," ",o.state) as fulladdress ', FALSE);
 		$this->db->from('orders as o');
 		$this->db->join('products as p','o.product_id=p.id','inner');
 		$this->db->join('users as u','o.user_id=u.id','inner');
