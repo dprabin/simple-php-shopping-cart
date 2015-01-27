@@ -58,6 +58,18 @@ class Reports extends CI_Controller{
 		}
 	}
 
+	public function all_products(){
+		if($this->session->userdata('previllege') == 'admin'){
+			$data['report_title'] = 'All Products';
+			$data['orders'] = $this->Product_model->get_products();
+			$data['main_content'] = 'reports/report_products';
+			$this->load->view('layouts/main',$data);
+		} else {
+			$this->session->set_flashdata('action_unsuccessful','You Need Admin Rights to view reports');
+			redirect('products');
+		}
+	}
+
 	public function orders_by_product($product_id=null){
 		if(!empty($product_id)){
 			$this->load->model('Order_model');
