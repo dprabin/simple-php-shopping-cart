@@ -1,28 +1,27 @@
 <?php
 class Reports extends CI_Controller{
-	public function index(){
-		if($this->session->userdata('previllege') == 'admin'){
-			$this->load->model('Order_model');
-			$data['report_title'] = 'Pending Orders';
-			$data['orders'] = $this->Order_model->get_orders_by('status','pending'); //status can be pending,delivered,settled,canceled
-			$data['main_content'] = 'reports/report_orders';
-			$this->load->view('layouts/main',$data);
-		} else {
-			$this->session->set_flashdata('action_unsuccessful','You Need Admin Rights to view reports');
+
+	function __construct() {
+		parent::__construct();
+		if(!$this->session->userdata('previllege') == 'admin'){
+			$this->session->set_flashdata('action_unsuccessful','You Need Admin Rights for that action.');
 			redirect('products');
 		}
 	}
+
+	public function index(){
+		$this->load->model('Order_model');
+		$data['report_title'] = 'Pending Orders';
+		$data['orders'] = $this->Order_model->get_orders_by('status','pending'); //status can be pending,delivered,settled,canceled
+		$data['main_content'] = 'reports/report_orders';
+		$this->load->view('layouts/main',$data);
+	}
 	public function all_orders(){
-		if($this->session->userdata('previllege') == 'admin'){
-			$this->load->model('Order_model');
-			$data['report_title'] = 'All Orders';
-			$data['orders'] = $this->Order_model->get_orders();
-			$data['main_content'] = 'reports/report_orders';
-			$this->load->view('layouts/main',$data);
-		} else {
-			$this->session->set_flashdata('action_unsuccessful','You Need Admin Rights to view reports');
-			redirect('products');
-		}
+		$this->load->model('Order_model');
+		$data['report_title'] = 'All Orders';
+		$data['orders'] = $this->Order_model->get_orders();
+		$data['main_content'] = 'reports/report_orders';
+		$this->load->view('layouts/main',$data);
 	}
 
 	public function orders_by_status($status=null){
@@ -58,18 +57,6 @@ class Reports extends CI_Controller{
 		}
 	}
 
-	public function all_products(){
-		if($this->session->userdata('previllege') == 'admin'){
-			$data['report_title'] = 'All Products';
-			$data['orders'] = $this->Product_model->get_products();
-			$data['main_content'] = 'reports/report_products';
-			$this->load->view('layouts/main',$data);
-		} else {
-			$this->session->set_flashdata('action_unsuccessful','You Need Admin Rights to view reports');
-			redirect('products');
-		}
-	}
-
 	public function orders_by_product($product_id=null){
 		if(!empty($product_id)){
 			$this->load->model('Order_model');
@@ -79,6 +66,27 @@ class Reports extends CI_Controller{
 			$this->load->view('layouts/main',$data);
 		} else {
 			$this->session->set_flashdata('action_unsuccessful','You didnt supply the status of order, displaying index page');
+			redirect('reports');
+		}
+	}
+
+	//Products report
+
+	public function all_products(){
+		$data['report_title'] = 'All Products';
+		$data['products'] = $this->Product_model->get_products();
+		$data['main_content'] = 'reports/report_products';
+		$this->load->view('layouts/main',$data);
+	}
+
+	public function products_by_category($category=null){
+		if(!empty($product_id)){
+			$data['report_title'] = 'Product by category: '.$category;
+			$data['products'] = $this->Product_model->get_products_by('category_name',$category); //if no data returned, redirect with message
+			$data['main_content'] = 'reports/report_products';
+			$this->load->view('layouts/main',$data);
+		} else {
+			$this->session->set_flashdata('action_unsuccessful','You didnt supply the category name, displaying index page');
 			redirect('reports');
 		}
 	}
