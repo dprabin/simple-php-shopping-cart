@@ -40,7 +40,7 @@ class Admin extends CI_Controller{
 			$this->load->view('layouts/main',$data);
 		} else {
 			$this->session->set_flashdata('action_unsuccessful','You didnt supply the status of order, displaying index page');
-			redirect('reports');
+			redirect('admin');
 		}
 	}
 
@@ -53,7 +53,7 @@ class Admin extends CI_Controller{
 			$this->load->view('layouts/main',$data);
 		} else {
 			$this->session->set_flashdata('action_unsuccessful','You didnt supply the status of order, displaying index page');
-			redirect('reports');
+			redirect('admin');
 		}
 	}
 
@@ -66,7 +66,7 @@ class Admin extends CI_Controller{
 			$this->load->view('layouts/main',$data);
 		} else {
 			$this->session->set_flashdata('action_unsuccessful','You didnt supply the status of order, displaying index page');
-			redirect('reports');
+			redirect('admin');
 		}
 	}
 
@@ -88,7 +88,7 @@ class Admin extends CI_Controller{
 			$this->load->view('layouts/main',$data);
 		} else {
 			$this->session->set_flashdata('action_unsuccessful','You didnt supply the category name, displaying index page');
-			redirect('reports/all_products');
+			redirect('admin/all_products');
 		}
 	}
 
@@ -99,6 +99,24 @@ class Admin extends CI_Controller{
 		$data['categories'] = $this->Product_model->get_categories();
 		$data['main_content'] = 'reports/report_all_categories';
 		$this->load->view('layouts/main',$data);
+	}
+
+	public function edit_category($id=null){
+		if(!empty($category)){
+
+		} else {
+			$this->session->set_flashdata('action_unsuccessful','You didnt supply the category name, displaying index page');
+			redirect('reports/all_products');
+		}
+	}
+
+	public function delete_category($id=null){
+		if(!empty($category)){
+
+		} else {
+			$this->session->set_flashdata('action_unsuccessful','You didnt supply the category name, displaying index page');
+			redirect('reports/all_products');
+		}
 	}
 }
 ?>
