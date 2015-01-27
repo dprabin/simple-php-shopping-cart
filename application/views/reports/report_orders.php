@@ -5,20 +5,23 @@
 		<?php foreach($orders as $order) : ?>
 			<tr>
 				<td><?php echo $order->id; ?></td>
-				<td><?php echo $order->fullname; ?></td>
+				<td><a href="<?php echo base_url(); ?>reports/orders_by_user/<?php echo $order->user_id; ?>"><?php echo $order->fullname; ?></a></td>
 				<td><?php echo $order->phone; ?></td>
 				<td><?php echo $order->fulladdress; ?></td>
-				<td><?php echo $order->title; ?></td>
+				<td><a href="<?php echo base_url(); ?>reports/orders_by_product/<?php echo $order->product_id; ?>"><?php echo $order->title; ?></a></td>
 				<td><?php echo $order->qty; ?></td>
 				<td><?php echo $order->price; ?></td>
 				<td><?php echo $order->timestamp; ?></td>
-				<td><?php echo $order->status; ?></td>
+				<td><a href="<?php echo base_url(); ?>reports/orders_by_status/<?php echo $order->status; ?>"><?php echo ucwords($order->status); ?></a></td>
 			</tr>
 		<?php endforeach; ?>
 	</table>
 	<br />
 	<ul>
-		<li><a href="reports/all_orders">All Orders list</a></li>
-		<li><a href="reports">Pending Orders</a></li>
+		<li><a href="<?php echo base_url(); ?>reports/all_orders">All Orders list</a></li>
+		<li><a href="<?php echo base_url(); ?>reports/orders_by_status/pending">Pending Orders</a></li>
+		<li><a href="<?php echo base_url(); ?>reports/orders_by_status/Settled">Settled Orders</a></li>
+		<li><a href="<?php echo base_url(); ?>reports/orders_by_status/delivered">Delivered Orders</a></li>
+		<li><a href="<?php echo base_url(); ?>reports/orders_by_status/canceled">Canceled Orders</a></li>
 	</ul>
 </div>
