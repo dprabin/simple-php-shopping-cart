@@ -11,6 +11,19 @@ class Order_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->results();
 	}
+
+	//Get list of all orders in database
+	public function get_orders(){
+		$this->db->select('*');
+		$this->db->from('orders');
+		$query = $this->db->get();
+		$return $query->results();
+	}
+
+	//Get order by id
+	public function get_order_by_id($id){
+		return false;
+	}
 	
 }
 
