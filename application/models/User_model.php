@@ -77,11 +77,12 @@ class User_model extends CI_Model{
 
 	//update  last_active in users table 
 	public function update_last_active(){
-		//$data = array('last_active' => date("Y-m-d H:i:s"));
+		//$data = array('last_active'=> 'DATE_ADD(NOW(), INTERVAL 1 MINUTE)');
 		//$this->db->where('id',$this->session->userdata('user_id'));
 		//$this->db->update('users',$data);
 		if ($this->session->userdata('logged_in')){
-			$q = "UPDATE users SET last_active = DATE_ADD(NOW(), INTERVAL 1 MINUTE) WHERE id = '".$this->session->userdata('user_id')."'";
+			$ip=$this->find_user_ip();
+			$q = "UPDATE users SET last_active = DATE_ADD(NOW(), INTERVAL 1 MINUTE), geolocation = '".$this->geoCheckIP($ip)."', last_logon_ip = '".$ip."' WHERE id = '".$this->session->userdata('user_id')."'";
 			$this->db->query($q);
 			return true;
 		} else {
