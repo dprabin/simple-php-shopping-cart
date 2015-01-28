@@ -16,6 +16,10 @@ class Admin extends CI_Controller{
 		$data['main_content'] = 'reports/report_orders';
 		$this->load->view('layouts/main',$data);
 	}
+
+
+	//Order Reports
+
 	public function all_orders(){
 		$this->load->model('Order_model');
 		$data['report_title'] = 'All Orders';
@@ -70,6 +74,7 @@ class Admin extends CI_Controller{
 		}
 	}
 
+
 	//Products report
 
 	public function all_products(){
@@ -92,11 +97,13 @@ class Admin extends CI_Controller{
 		}
 	}
 
-	//Categories
+
+	//Categories 
 
 	public function categories(){
+		$this->load->model('Category_model');
 		$data['report_title'] = 'All categories with product count';
-		$data['categories'] = $this->Product_model->get_categories();
+		$data['categories'] = $this->Category_model->get_categories();
 		$data['main_content'] = 'reports/report_all_categories';
 		$this->load->view('layouts/main',$data);
 	}
@@ -105,6 +112,7 @@ class Admin extends CI_Controller{
 		//validation Rules
 		$this->form_validation->set_rules('category_name','Name of the Category', 'trim|required|min_length[4]|max_length[30]');
 		if($this->form_validation->run() == FALSE){
+			$this->load->model('Category_model');
 			$data['main_content'] = 'reports/add_category';
 			$this->load->view('layouts/main',$data);
 		} else {
@@ -117,6 +125,8 @@ class Admin extends CI_Controller{
 
 	public function edit_category($category_id=null){
 		if(!empty($category_id)){
+			//First load the category_model
+			$this->load->model('Category_model');
 			//validation Rules
 			$this->form_validation->set_rules('category_name','Name of the Category', 'trim|required|min_length[4]|max_length[30]');
 			if($this->form_validation->run() == FALSE){
@@ -124,7 +134,7 @@ class Admin extends CI_Controller{
 				$data['main_content'] = 'reports/add_category';
 				$this->load->view('layouts/main',$data);
 			} else {
-				if($this->Product_model->add_category()){
+				if($this->Category_model->add_category()){
 					$this->session->set_flashdata('action_successful','New Category has been added successfully');//flashdata in ci can be used in new view also
 					redirect('admin/categories');
 				}
