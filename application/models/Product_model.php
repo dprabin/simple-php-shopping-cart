@@ -86,15 +86,6 @@ class Product_model extends CI_Model{
 		//return $this->db->update('order',$data2);
 	}
 
-	//Get items of specific category
-	public function get_category_items($category_id){
-		$this->db->select('*');
-		$this->db->from('products');
-		$this->db->where('category_id',$category_id);
-		$query = $this->db->get();
-		return $query->result();
-	}
-
 	//Get Popular Product
 	public function get_popular(){
 		$this->db->select('p.title,p.id, count(o.product_id) as total');
@@ -102,31 +93,10 @@ class Product_model extends CI_Model{
 		$this->db->join('products as p','o.product_id = p.id','inner');
 		$this->db->group_by('o.product_id');
 		$this->db->order_by('total','desc');
-		//$this->db->limit('5');
+		$this->db->limit('5');
 		$query = $this->db->get();
 		return $query->result();
 	}
-
-
-	/*
-	 * The codeblock below handles categories, add edit and delete categories
-	 * We may move this block to category model. a model for each table plus some other
-	 */
-	public function add_category(){
-		$data = array(
-			'name' => $this->input->post('category_name'));
-		$insert = $this->db->insert('categories',$data);
-		return $insert;
-	}
-
-	public function edit_category(){
-		$data = array(
-			'name' => $this->input->post('category_name'));
-		$this->db->where('id',$this->input->post('category_id'));
-		$update = $this->db->update('products',$data);
-		return $update;
-	}
-
 }
 
 ?>
