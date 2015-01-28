@@ -13,13 +13,17 @@ class Products extends CI_Controller{
 
     //Display the detail information of a product
     public function details($id){
-    	//Get Product Details
-    	$data['product'] = $this->Product_model->get_product_details($id);
-
-    	//Define the main content as details view
-        $data['main_content'] = 'details';
-        //load product view
-        $this->load->view('layouts/main',$data);
+        if(!empty($id)){
+        	//Get Product Details
+        	$data['product'] = $this->Product_model->get_product_details($id);
+        	//Define the main content as details view
+            $data['main_content'] = 'details';
+            //load product view
+            $this->load->view('layouts/main',$data);
+        } else {
+            $this->session->set_flashdata('action_unsuccessful','You didnt supply the product id');
+            redirect('products');
+        }
     }
 
     //Display the detail information of a product
@@ -104,24 +108,29 @@ class Products extends CI_Controller{
     }
 
     //Remove Product form database
-    public function remove($id){
-        if ($this->session->userdata('previllege')=='admin'){
-            //Confirm before removing product
-            $this->Product_model->remove_product($id);
-
-            $this->session->set_flashdata('action_successful','The product is successfully deleted');
-            redirect('products');
+    public function delete($id=null){
+        if(!empty($id)){
+            if ($this->session->userdata('previllege')=='admin'){
+                //Confirm before removing product
+                $this->Product_model->delete_product($id);
+                $this->session->set_flashdata('action_successful','The product is successfully deleted');
+            }
+        } else {
+            $this->session->set_flashdata('action_unsuccessful','Please supply the product id');
         }
+        redirect('products');
     }
 
     //Category viewer
-    public function category($id){
-        //Get details
-        $data['category_items'] = $this->Product_model->get_category_items($id);
-
-        //Send data to view
-        $data['main_content'] = 'category';
-        $this->load->view('layouts/main',$data);
+    public function category($id=null){
+         if(!empty($id)){
+            $data['category_items'] = $this->Product_model->get_category_items($id);
+            $data['main_content'] = 'category';
+            $this->load->view('layouts/main',$data);
+        } else {
+            $this->session->set_flashdata('action_unsuccessful','You didnt supply the category id');
+            redirect('products');
+        }
     }
 }
 
