@@ -42,5 +42,15 @@
     <label>Country/State*</label>
     <input type="text" class="form-control" name="state" placeholder="Current country and state" value="<?php echo $user->state; ?>" />
   </div>
+  <?php if($this->session->userdata('previllege') == 'admin') : ?>
+    <div class="form-group">
+      <label>Previllege</label>
+      <select name="previllege">
+        <?php foreach($previlleges as $previllege) : ?>
+          <option value="<?php echo $previllege->previllege; ?>" <?php echo set_value('previllege') == $previllege->previllege ? 'selected="selected"' : ''; ?> ><?php echo $previllege->previllege; ?></option>
+      <? endforeach; ?>
+      </select>
+    </div>
+  <?php endif; ?>
   <button type="submit" class="btn btn-primary" name="submit">Update</button>
 </form>
