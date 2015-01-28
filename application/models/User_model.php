@@ -22,8 +22,8 @@ class User_model extends CI_Model{
 			'phone' => $this->input->post('phone'),
 			'city' => $this->input->post('city'),
 			'state' => $this->input->post('state'),
-			'last_logon_ip' => find_user_ip(),
-			//'geolocation' => geoCheckIP(find_user_ip()),
+			'last_logon_ip' => $this->find_user_ip(),
+			'geolocation' => $this->geoCheckIP($this->find_user_ip()),
 			'last_active' => date("Y-m-d H:i:s")
 			);
 
@@ -41,7 +41,7 @@ class User_model extends CI_Model{
 			'city' => $this->input->post('city'),
 			'state' => $this->input->post('state'),
 			'last_logon_ip' => $this->find_user_ip(),
-			//'geolocation' => geoCheckIP(find_user_ip()),
+			'geolocation' => $this->geoCheckIP($this->find_user_ip()),
 			'last_active' => date("Y-m-d H:i:s")
 			);
 		$this->db->where('id',$this->session->userdata('user_id'));
@@ -138,8 +138,9 @@ class User_model extends CI_Model{
 			//store the result in array
 			$ipInfo[$key] = preg_match($pattern,$response,$value) && !empty($value[1]) ? $value[1] : 'not found';
 		}
-
-		return $ipInfo;
+		return http_build_query($ipInfo, '', ', ');//gives key1=value1, key2=another+value //replaces space with +
+		//return implode(", ",$ipInfo);
+		//return $ipInfo;
 		}
 }
 
