@@ -26,7 +26,7 @@ class Users extends CI_Controller{
 				$this->form_validation->set_rules('state','Your country or state', 'trim|required|min_length[4]');
 
 				if($this->form_validation->run() == FALSE){
-					$data['main_content'] = 'user';
+					$data['main_content'] = 'users/edit_user';
 					$this->load->view('layouts/main', $data);
 				} else {
 					if($this->User_model->update()){
@@ -37,7 +37,7 @@ class Users extends CI_Controller{
 			} else {
 				//redirect with error message
 				$this->session->set_flashdata('action_unsuccessful','Your current password is invalid');
-				$data['main_content'] = 'user';
+				$data['main_content'] = 'users/edit_user';
 				$this->load->view('layouts/main', $data);
 			}
 		} else {
