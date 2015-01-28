@@ -59,13 +59,21 @@ class Product_model extends CI_Model{
 	}
 
 	//Remove product
-	public function remove_product($id){
+	public function delete_product($id){
+		//Start transaction
+		$this->db->trans_start();
 		//Delete from products
-		//$data=array('id'=>$id);
-		//return $this>db->delete('products',$data);
-		//set deleted
-		//$data2=array('product_id'=>$id);
-		//return $this->db->update('order',$data2);
+		$this->db->where('id'=>$id);
+		$this->db->delete('products');
+		//update orders with product_id =$id
+		$this->db->where('product_id'=>$id);
+		//return $this->db->update('order',array('product_deleted'=>'deleted'));
+		//For now, delete all from orders with product id
+		$this->db->delete('order')
+		//Complete transaction
+		$this->db->trans_complete();
+		//Return transaction status
+		return $this->db->trans_status();
 	}
 
 	//Get Popular Product
