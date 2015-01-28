@@ -16,11 +16,11 @@ class Category_model extends CI_Model{
 
 	//Get a single category
 	public function get_category($category_id){
-		$this->db->select('*',false); //false will escape characters
-		$this->db->from('categories as c');
+		$this->db->select('*');
+		$this->db->from('categories');
 		$this->db->where('id',$category_id);
 		$query = $this->db->get();
-		return $query->result();
+		return $query->row();
 	}
 
 	public function add_category(){
