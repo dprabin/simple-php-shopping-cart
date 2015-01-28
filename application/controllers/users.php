@@ -2,50 +2,66 @@
 class Users extends CI_Controller{
 
 	//Users index
-	//Should separate index and edit_user method
 	public function index(){
-		if ($this->session->userdata('logged_in')){
-			//Load current user data
-			$data['user'] = $this->User_model->get_user_details($this->session->userdata('user_id'));
-			$data['previlleges'] = $this->User_model->get_user_previlleges();
-
-			//Validation Rules
-			$this->form_validation->set_rules('old_password','Current Password', 'trim|required');
-
-			$password = md5($this->input->post('old_password'));
-			$valid_password = $this->User_model->check_password($password);
-
-			//If password confirm, then proceed other form validation
-			if($valid_password){
-				$this->form_validation->set_rules('password','New Password', 'trim|required|max_length[50]|min_length[4]');
-				$this->form_validation->set_rules('password2','Confirm new Password', 'trim|required|matches[password]');
-
-				$this->form_validation->set_rules('address','Address: Locality, Street, House number', 'trim|required|min_length[5]');
-				$this->form_validation->set_rules('address2','Address2: Directions and Placemarks', 'trim|required|min_length[4]');
-				$this->form_validation->set_rules('phone','Phone Number', 'trim|required|min_length[6]');
-				$this->form_validation->set_rules('city','Your City', 'trim|required|min_length[3]');
-				$this->form_validation->set_rules('state','Your country or state', 'trim|required|min_length[4]');
-
-				if($this->form_validation->run() == FALSE){
-					$data['main_content'] = 'users/edit_user';
-					$this->load->view('layouts/main', $data);
-				} else {
-					if($this->User_model->update()){
-						$this->session->set_flashdata('action_successful','Your record is updated');
-						redirect('products');
-					}
-				}
-			} else {
-				//redirect with error message
-				$this->session->set_flashdata('action_unsuccessful','Your current password is invalid');
-				$data['main_content'] = 'users/edit_user';
-				$this->load->view('layouts/main', $data);
-			}
+		if ($this->session->userdata('previllege')=='admin' && $this->session->userdata('logged_in')){
+			$data['main_content'] = 'users/list_all_users';
+			$this->load->view('layouts/main',$data);
+		} else if($this->session->userdata('previllege')!='admin' && $this->session->userdata('logged_in')){
+			redirect('edit_user/'.$this->session->userdata('user_id'))
 		} else {
-			$this->session->set_flashdata('action_successful','You need to login');
+			$this->session->set_flashdata('action_unsuccessful','Please login to view your details');
 			redirect('products');
 		}
+	}
 
+	//edit any user with user_id=id
+	public function edit_user($id=null){
+		if(!empty($id)){
+			if ($this->session->userdata('previllege')=='admin' || $this->session->userdata('user_id')==$id){
+				//Load current user data
+				$data['user'] = $this->User_model->get_user_details($id);
+				$data['previlleges'] = $this->User_model->get_user_previlleges();
+
+				//Validation Rules
+				$this->form_validation->set_rules('old_password','Current Password', 'trim|required');
+
+				$password = md5($this->input->post('old_password'));
+				$valid_password = $this->User_model->check_password($password);
+
+				//If password confirm, then proceed other form validation
+				if($valid_password){
+					$this->form_validation->set_rules('password','New Password', 'trim|required|max_length[50]|min_length[4]');
+					$this->form_validation->set_rules('password2','Confirm new Password', 'trim|required|matches[password]');
+
+					$this->form_validation->set_rules('address','Address: Locality, Street, House number', 'trim|required|min_length[5]');
+					$this->form_validation->set_rules('address2','Address2: Directions and Placemarks', 'trim|required|min_length[4]');
+					$this->form_validation->set_rules('phone','Phone Number', 'trim|required|min_length[6]');
+					$this->form_validation->set_rules('city','Your City', 'trim|required|min_length[3]');
+					$this->form_validation->set_rules('state','Your country or state', 'trim|required|min_length[4]');
+
+					if($this->form_validation->run() == FALSE){
+						$data['main_content'] = 'users/edit_user';
+						$this->load->view('layouts/main', $data);
+					} else {
+						if($this->User_model->update()){
+							$this->session->set_flashdata('action_successful','Your record is updated');
+							redirect('products');
+						}
+					}
+				} else {
+					//redirect with error message
+					$this->session->set_flashdata('action_unsuccessful','Your current password is invalid');
+					$data['main_content'] = 'users/edit_user';
+					$this->load->view('layouts/main', $data);
+				}
+			} else {
+				$this->session->set_flashdata('action_successful','You need to login');
+				redirect('products');
+			}
+		} else {
+			$this->session->set_flashdata('action_unsuccessful','Not a user of the system');
+			redirect('products');
+		}
 	}
 
 	//Register New user
