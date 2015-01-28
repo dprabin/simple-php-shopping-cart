@@ -5,5 +5,5 @@
 		<label>Category Name*</label>
 		<input type="text" class="form-control" name="category_name" placeholder="Category name" value="<?php echo set_value('category_name'); ?>" />
 	</div>
-	<button type="submit" class="btn btn-primary" name="submit">Register</button>
+	<button type="submit" class="btn btn-primary" name="submit">Add Category</button>
 </form>
