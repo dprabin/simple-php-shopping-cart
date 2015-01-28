@@ -29,24 +29,6 @@ class Product_model extends CI_Model{
 		return $query->result();
 	}
 
-	//Get Categories
-	public function get_categories(){
-		$this->db->select('c.*,count(p.id) as product_count',false); //false will escape characters
-		$this->db->from('categories as c');
-		$this->db->join('products as p','c.id=p.category_id','inner');
-		$this->db->group_by('c.id');
-		$query = $this->db->get();
-		return $query->result();
-	}
-	//Get a single category
-	public function get_category($category_id){
-		$this->db->select('*',false); //false will escape characters
-		$this->db->from('categories as c');
-		$this->db->where('id',$category_id);
-		$query = $this->db->get();
-		return $query->result();
-	}
-
 	//Update products
 	public function update(){
 		$data = array(
