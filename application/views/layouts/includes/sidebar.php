@@ -6,10 +6,19 @@
     </div>
     <ul class="list-group">
       <li class="list-group-item"><a href="<?php echo base_url(); ?>admin/all_products">All Products</a></li>
-      <li class="list-group-item"><a href="<?php echo base_url(); ?>admin/products_by_category">Product by Category</a></li>
       <li class="list-group-item"><a href="<?php echo base_url(); ?>admin/categories">Categories</a></li>
     </ul>
   </div><!--/Products -->
+
+    <div class="panel panel-default panel-list"><!-- Users -->
+    <div class="panel-heading panel-heading-dark">
+      <h3 class="panel-title">Users</h3>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item"><a href="<?php echo base_url(); ?>users">All Users</a></li>
+      <li class="list-group-item"><a href="<?php echo base_url(); ?>users/register">Add User</a></li>
+    </ul>
+  </div><!--/users -->
 
   <div class="panel panel-default panel-list"><!-- Order Report -->
     <div class="panel-heading panel-heading-dark">
