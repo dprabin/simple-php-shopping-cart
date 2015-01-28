@@ -124,7 +124,7 @@ class Admin extends CI_Controller{
 	}
 
 	public function edit_category($category_id=null){
-		if(!empty($category_id)){
+		if(!empty($category_id) or $_POST){
 			//First load the category_model
 			$this->load->model('Category_model');
 			//validation Rules
@@ -134,7 +134,7 @@ class Admin extends CI_Controller{
 				$data['main_content'] = 'reports/edit_category';
 				$this->load->view('layouts/main',$data);
 			} else {
-				if($this->Category_model->add_category()){
+				if($this->Category_model->edit_category()){
 					$this->session->set_flashdata('action_successful','New Category has been added successfully');//flashdata in ci can be used in new view also
 					redirect('admin/categories');
 				}
