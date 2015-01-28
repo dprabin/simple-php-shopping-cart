@@ -31,7 +31,7 @@ class Users extends CI_Controller{
 					$this->form_validation->set_rules('password','New Password', 'trim|required|max_length[50]|min_length[4]');
 				}
 				$this->form_validation->set_rules('password2','Confirm new Password', 'trim|matches[password]');
-
+				$this->form_validation->set_rules('email','Email address', 'trim|required|valid_email|is_unique[users.email]');
 				$this->form_validation->set_rules('address','Address: Locality, Street, House number', 'trim|required|min_length[5]');
 				$this->form_validation->set_rules('address2','Address2: Directions and Placemarks', 'trim|required|min_length[4]');
 				$this->form_validation->set_rules('phone','Phone Number', 'trim|required|min_length[6]');
@@ -67,8 +67,8 @@ class Users extends CI_Controller{
 		//Validation Rules
 		$this->form_validation->set_rules('first_name','First Name', 'trim|required|min_length[2]');
 		$this->form_validation->set_rules('last_name','Last Name', 'trim|required|min_length[2]');
-		$this->form_validation->set_rules('email','Email', 'trim|required|valid_email');
-		$this->form_validation->set_rules('username','Username', 'trim|required|max_length[20]|min_length[3]');
+		$this->form_validation->set_rules('email','Email', 'trim|required|valid_email|is_unique[users.email]');
+		$this->form_validation->set_rules('username','Username', 'trim|required|max_length[20]|min_length[3]|is_unique[users.username]');
 		$this->form_validation->set_rules('password','Password', 'trim|required|max_length[50]|min_length[4]');
 		$this->form_validation->set_rules('password2','Confirm Password', 'trim|required|matches[password]');
 
