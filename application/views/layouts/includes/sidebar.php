@@ -6,7 +6,9 @@
     </div>
     <ul class="list-group">
       <li class="list-group-item"><a href="<?php echo base_url(); ?>admin/all_products">All Products</a></li>
+      <li class="list-group-item"><a href="<?php echo base_url(); ?>products/add">Add new product</a></li>
       <li class="list-group-item"><a href="<?php echo base_url(); ?>admin/categories">Categories</a></li>
+      <li class="list-group-item"><a href="<?php echo base_url(); ?>admin/add_category">Add new category</a></li>
     </ul>
   </div><!--/Products -->
 
