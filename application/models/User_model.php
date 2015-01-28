@@ -1,5 +1,22 @@
 <?php 
 class User_model extends CI_Model{
+	//Get list of all users in system
+	public function get_users(){
+		$this->db->select('*');
+		$this->db->from('users');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	//Get users by field
+	public function get_users_by($fieldname,$value){
+		$this->db->select('*');
+		$this->db->from('users');
+		$this->db->where($fieldname,$value);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 	//Get User details
 	public function get_user_details($id){
 		$this->db->select('*');
