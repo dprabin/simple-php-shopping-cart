@@ -39,7 +39,7 @@
         <?php if(!$this->session->userdata('logged_in')) : ?>
           <li><a href="<?php echo base_url(); ?>users/register">Create Account</a></li>
         <?php else : ?>
-          <li><a href="<?php echo base_url(); ?>users">Logged in as <?php echo $this->session->userdata('username'); ?></a></li>
+          <li><a href="<?php echo base_url(); ?>users/edit_user/<?php echo $this->session->userdata('user_id'); ?>">Logged in as <?php echo $this->session->userdata('username'); ?></a></li>
         <?php endif; ?>
         <?php if($this->session->userdata('previllege')=='admin') : ?>
           <li><a href="<?php echo base_url(); ?>products/add">Add Product</a></li>
