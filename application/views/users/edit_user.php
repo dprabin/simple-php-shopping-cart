@@ -47,7 +47,7 @@
       <label>Previllege</label>
       <select name="previllege">
         <?php foreach($previlleges as $previllege) : ?>
-          <option value="<?php echo $previllege->previllege; ?>" <?php echo set_value('previllege') == $previllege->previllege ? 'selected="selected"' : ''; ?> ><?php echo $previllege->previllege; ?></option>
+          <option value="<?php echo $previllege->previllege; ?>" <?php echo ($user->previllege) == $previllege->previllege ? 'selected="selected"' : ''; ?> ><?php echo $previllege->previllege; ?></option>
       <? endforeach; ?>
       </select>
     </div>
