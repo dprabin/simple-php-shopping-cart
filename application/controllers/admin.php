@@ -112,12 +112,12 @@ class Admin extends CI_Controller{
 		//validation Rules
 		$this->form_validation->set_rules('category_name','Name of the Category', 'trim|required|min_length[4]|max_length[30]');
 		if($this->form_validation->run() == FALSE){
-			$this->load->model('Category_model');
 			$data['main_content'] = 'reports/add_category';
 			$this->load->view('layouts/main',$data);
 		} else {
+			$this->load->model('Category_model');
 			if($this->Category_model->add_category()){
-				$this->session->set_flashdata('action_successful','New Category has been added successfully');//flashdata in ci can be used in new view also
+				$this->session->set_flashdata('action_successful','New Category '.$this->input->post('category_name').' has been added successfully');//flashdata in ci can be used in new view also
 				redirect('admin/categories');
 			}
 		}
