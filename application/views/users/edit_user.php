@@ -20,9 +20,10 @@
     <label>Confirm New Password*</label>
     <input type="password" class="form-control" name="password2" placeholder="Confirm your new password"  />
   </div>
-    <div class="form-group">
+  <div class="form-group">
     <label>Email Address*</label>
     <input type="email" class="form-control" name="email" placeholder="Your email address" value="<?php echo $user->email; ?>"  />
+    <input type="hidden" name="old_email" value="<?php echo $user->email; ?>" />
   </div>
   <hr>
   <div class="form-group">
