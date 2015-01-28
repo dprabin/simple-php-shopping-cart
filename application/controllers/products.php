@@ -114,6 +114,7 @@ class Products extends CI_Controller{
                 //Confirm before removing product in javascript
                 $this->Product_model->delete_product($id);
                 $this->session->set_flashdata('action_successful','The product is successfully deleted');
+                redirect('admin/all_products');
             }
         } else {
             $this->session->set_flashdata('action_unsuccessful','Please supply the product id');
