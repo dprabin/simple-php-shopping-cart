@@ -1,6 +1,6 @@
 <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
 <h3>New Category</h3>
-<form method="post" action="<?php echo base_url(); ?>users/add_category">
+<form method="post" action="<?php echo base_url(); ?>admin/edit_category">
 	<input type="hidden" name="category_id" value="<?php echo $category->id; ?>">
 	<div class="form-group">
 		<label>Category Name*</label>
