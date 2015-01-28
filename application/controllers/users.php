@@ -4,10 +4,11 @@ class Users extends CI_Controller{
 	//Users index
 	public function index(){
 		if ($this->session->userdata('previllege')=='admin' && $this->session->userdata('logged_in')){
+			$data['users'] = $this->User_model->get_users();
 			$data['main_content'] = 'users/list_all_users';
 			$this->load->view('layouts/main',$data);
 		} else if($this->session->userdata('previllege')!='admin' && $this->session->userdata('logged_in')){
-			redirect('edit_user/'.$this->session->userdata('user_id'))
+			redirect('edit_user/'.$this->session->userdata('user_id'));
 		} else {
 			$this->session->set_flashdata('action_unsuccessful','Please login to view your details');
 			redirect('products');
