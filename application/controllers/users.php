@@ -2,6 +2,7 @@
 class Users extends CI_Controller{
 
 	//Users index
+	//Should separate index and edit_user method
 	public function index(){
 		if ($this->session->userdata('logged_in')){
 			//Load current user data
