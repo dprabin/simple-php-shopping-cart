@@ -124,7 +124,7 @@ class Admin extends CI_Controller{
 	}
 
 	public function edit_category($category_id=null){
-		if(!empty($category_id) or $_POST){
+		if(!empty($category_id) || $_POST){
 			//First load the category_model
 			$this->load->model('Category_model');
 			//validation Rules
