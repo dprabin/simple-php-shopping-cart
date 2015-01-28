@@ -49,7 +49,8 @@ class User_model extends CI_Model{
 	}
 
 	//Update User
-	public function update(){
+	public function edit_user($id){
+		$userip=this->find_user_ip();
 		$data = array(
 			'password' => md5($this->input->post('password')),
 			'address' => $this->input->post('address'),
@@ -57,11 +58,13 @@ class User_model extends CI_Model{
 			'phone' => $this->input->post('phone'),
 			'city' => $this->input->post('city'),
 			'state' => $this->input->post('state'),
-			'last_logon_ip' => $this->find_user_ip(),
-			'geolocation' => $this->geoCheckIP($this->find_user_ip()),
+			'last_logon_ip' => $userip,
+			'geolocation' => $this->geoCheckIP($userip),
 			'last_active' => date("Y-m-d H:i:s")
 			);
-		$this->db->where('id',$this->session->userdata('user_id'));
+		//if password is supplied, then add that to array, otherwise dont update that field
+		//don't update last_logon_ip, geolocation and last_active if admin
+		$this->db->where('id',$id);
 		$update = $this->db->update('users',$data);
 		return $update;
 	}
@@ -104,8 +107,8 @@ class User_model extends CI_Model{
 	}
 
 	//Returns true if supplied password matches with current password of current user
-	public function check_password($password){
-		$this->db->where('id',$this->session->userdata('user_id'));
+	public function check_password($password,$id){
+		$this->db->where('id',$id);
 		$this->db->where('password',$password);
 		$result = $this->db->get('users');
 		if($result->num_rows() == 1){
