@@ -63,13 +63,13 @@ class Product_model extends CI_Model{
 		//Start transaction
 		$this->db->trans_start();
 		//Delete from products
-		$this->db->where('id'=>$id);
+		$this->db->where('id',$id);
 		$this->db->delete('products');
 		//update orders with product_id =$id
-		$this->db->where('product_id'=>$id);
+		$this->db->where('product_id',$id);
 		//return $this->db->update('order',array('product_deleted'=>'deleted'));
 		//For now, delete all from orders with product id
-		$this->db->delete('order')
+		$this->db->delete('order');
 		//Complete transaction
 		$this->db->trans_complete();
 		//Return transaction status
