@@ -145,12 +145,12 @@ class Admin extends CI_Controller{
 		}
 	}
 
-	public function delete_category($id=null){
-		if(!empty($category)){
+	public function delete_category($category_id=null){
+		if(!empty($category_id)){
 
 		} else {
 			$this->session->set_flashdata('action_unsuccessful','You didnt supply the category name, displaying index page');
-			redirect('admin/all_products');
+			redirect('admin/categories');
 		}
 	}
 }
