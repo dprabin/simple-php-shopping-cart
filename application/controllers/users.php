@@ -7,6 +7,7 @@ class Users extends CI_Controller{
 		if ($this->session->userdata('logged_in')){
 			//Load current user data
 			$data['user'] = $this->User_model->get_user_details($this->session->userdata('user_id'));
+			$data['previlleges'] = $this->User_model->get_user_previlleges();
 
 			//Validation Rules
 			$this->form_validation->set_rules('old_password','Current Password', 'trim|required');
