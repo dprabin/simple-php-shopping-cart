@@ -30,8 +30,15 @@ class Users extends CI_Controller{
 				if($this->input->post('password')!=''){
 					$this->form_validation->set_rules('password','New Password', 'trim|required|max_length[50]|min_length[4]');
 				}
+				//if old_email=new email, don't check validation rule for uniqueness
+				if($this->input->post('old_email')==$this->input->post('email')){
+					$this->form_validation->set_rules('email','Email address', 'trim|required|valid_email');
+				} else {
+					$this->form_validation->set_rules('email','Email address', 'trim|required|valid_email|is_unique[users.email]');
+				}
+
 				$this->form_validation->set_rules('password2','Confirm new Password', 'trim|matches[password]');
-				$this->form_validation->set_rules('email','Email address', 'trim|required|valid_email|is_unique[users.email]');
+				
 				$this->form_validation->set_rules('address','Address: Locality, Street, House number', 'trim|required|min_length[5]');
 				$this->form_validation->set_rules('address2','Address2: Directions and Placemarks', 'trim|required|min_length[4]');
 				$this->form_validation->set_rules('phone','Phone Number', 'trim|required|min_length[6]');
