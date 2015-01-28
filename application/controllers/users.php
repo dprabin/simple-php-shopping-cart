@@ -43,8 +43,13 @@ class Users extends CI_Controller{
 					$this->load->view('layouts/main', $data);
 				} else {
 					if($this->User_model->edit_user($id)){
-						$this->session->set_flashdata('action_successful','Your record is updated');
-						redirect('products');
+						if ($this->session->userdata('previllege')=='admin'){
+							$this->session->set_flashdata('action_successful','User account updated');//flashdata in ci can be used in new view also
+							redirect('users');
+						} else {
+							$this->session->set_flashdata('action_successful','Your record is updated');//flashdata in ci can be used in new view also
+							redirect('products');
+						}
 					}
 				}
 			} else {
@@ -78,8 +83,13 @@ class Users extends CI_Controller{
 			$this->load->view('layouts/main',$data);
 		} else {
 			if($this->User_model->register()){
-				$this->session->set_flashdata('action_successful','You are now registered and can login');//flashdata in ci can be used in new view also
-				redirect('products');
+				if ($this->session->userdata('previllege')=='admin'){
+					$this->session->set_flashdata('action_successful','New user is created');//flashdata in ci can be used in new view also
+					redirect('users');
+				} else {
+					$this->session->set_flashdata('action_successful','You are now registered and can login');//flashdata in ci can be used in new view also
+					redirect('products');
+				}
 			}
 		}
 	}
