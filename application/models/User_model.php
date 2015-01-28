@@ -50,7 +50,7 @@ class User_model extends CI_Model{
 
 	//Update User
 	public function edit_user($id){
-		$userip=this->find_user_ip();
+		$userip=$this->find_user_ip();
 		$data = array(
 			'password' => md5($this->input->post('password')),
 			'address' => $this->input->post('address'),
