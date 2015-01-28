@@ -2,7 +2,6 @@
 <form method="post" action="<?php echo base_url(); ?>users/edit_user/<?php echo $user->id; ?>">
   <h3><?php echo $user->first_name." ".$user->last_name; ?></h3>
   <ul><li>Username: <?php echo $user->username; ?></li>
-  <li>Email: <?php echo $user->email; ?></li>
   <li>Join date: <?php echo $user->join_date; ?></li>
   <li>Last IP: <?php echo $user->last_logon_ip; ?></li>
   <li>Geolocation: <?php echo $user->geolocation; ?></li>
@@ -20,6 +19,10 @@
   <div class="form-group">
     <label>Confirm New Password*</label>
     <input type="password" class="form-control" name="password2" placeholder="Confirm your new password"  />
+  </div>
+    <div class="form-group">
+    <label>Email Address*</label>
+    <input type="email" class="form-control" name="email" placeholder="Your email address" value="<?php echo $user->email; ?>"  />
   </div>
   <hr>
   <div class="form-group">
