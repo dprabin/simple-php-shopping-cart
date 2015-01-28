@@ -8,7 +8,7 @@
 				<td><a href="<?php echo base_url(); ?>admin/products_by_category/<?php echo $category->name; ?>"><?php echo $category->name; ?></a></td>
 				<td><?php echo $category->product_count; ?></td>
 				<td><a href="<?php echo base_url(); ?>admin/edit_category/<?php echo $category->id; ?>">Edit</a></td>
-				<td><a href="<?php echo base_url(); ?>admin/delete_category/<?php echo $category->id; ?>">Delete</a></td>
+				<td><?=anchor("admin/delete_category/".$category->id,"Delete",array('onclick' => "return confirm('Do you want delete this record?')"))?></td>
 			</tr>
 		<?php endforeach; ?>
 	</table>
