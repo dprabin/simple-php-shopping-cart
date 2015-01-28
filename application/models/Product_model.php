@@ -38,6 +38,14 @@ class Product_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
+	//Get a single category
+	public function get_category($category_id){
+		$this->db->select('*',false); //false will escape characters
+		$this->db->from('categories as c');
+		$this->db->where('id',$category_id);
+		$query = $this->db->get();
+		return $query->result();
+	}
 
 	//Update products
 	public function update(){
@@ -98,6 +106,27 @@ class Product_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+
+	/*
+	 * The codeblock below handles categories, add edit and delete categories
+	 * We may move this block to category model. a model for each table plus some other
+	 */
+	public function add_category(){
+		$data = array(
+			'name' => $this->input->post('category_name'));
+		$insert = $this->db->insert('categories',$data);
+		return $insert;
+	}
+
+	public function edit_category(){
+		$data = array(
+			'name' => $this->input->post('category_name'));
+		$this->db->where('id',$this->input->post('category_id'));
+		$update = $this->db->update('products',$data);
+		return $update;
+	}
+
 }
 
 ?>
