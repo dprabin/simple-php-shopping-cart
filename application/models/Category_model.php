@@ -36,5 +36,9 @@ class Category_model extends CI_Model{
 		$update = $this->db->update('categories',$data);
 		return $update;
 	}
+	public function delete_caategory($category_id){
+		$this->db->where('id',$category_id);
+		return $this->db->delete('categories');
+	}
 }
 ?>
