@@ -131,7 +131,7 @@ class Admin extends CI_Controller{
 			$this->form_validation->set_rules('category_name','Name of the Category', 'trim|required|min_length[4]|max_length[30]');
 			if($this->form_validation->run() == FALSE){
 				$data['category'] = $this->Category_model->get_category($category_id);
-				$data['main_content'] = 'reports/add_category';
+				$data['main_content'] = 'reports/edit_category';
 				$this->load->view('layouts/main',$data);
 			} else {
 				if($this->Category_model->add_category()){
