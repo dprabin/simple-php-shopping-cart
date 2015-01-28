@@ -33,7 +33,7 @@ class Category_model extends CI_Model{
 		$data = array(
 			'name' => $this->input->post('category_name'));
 		$this->db->where('id',$this->input->post('category_id'));
-		$update = $this->db->update('products',$data);
+		$update = $this->db->update('categories',$data);
 		return $update;
 	}
 }
