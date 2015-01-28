@@ -3,7 +3,7 @@ class Admin extends CI_Controller{
 
 	function __construct() {
 		parent::__construct();
-		if(!$this->session->userdata('previllege') == 'admin'){
+		if($this->session->userdata('previllege') != 'admin'){
 			$this->session->set_flashdata('action_unsuccessful','You Need Admin Rights for that action.');
 			redirect('products');
 		}
