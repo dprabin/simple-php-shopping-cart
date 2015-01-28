@@ -101,12 +101,37 @@ class Admin extends CI_Controller{
 		$this->load->view('layouts/main',$data);
 	}
 
+	public function add_category(){
+		//validation Rules
+		$this->form_validation->set_rules('category_name','Name of the Category', 'trim|required|min_length[4]|max_length[30]');
+		if($this->form_validation->run() == FALSE){
+			$data['main_content'] = 'reports/add_category';
+			$this->load->view('layouts/main',$data);
+		} else {
+			if($this->Product_model->add_category()){
+				$this->session->set_flashdata('action_successful','New Category has been added successfully');//flashdata in ci can be used in new view also
+				redirect('admin/categories');
+			}
+		}
+	}
+
 	public function edit_category($id=null){
 		if(!empty($category)){
-
+			//validation Rules
+			$this->form_validation->set_rules('category_name','Name of the Category', 'trim|required|min_length[4]|max_length[30]');
+			if($this->form_validation->run() == FALSE){
+				$data['category'] = $this->Product_model->get_category($id);
+				$data['main_content'] = 'reports/add_category';
+				$this->load->view('layouts/main',$data);
+			} else {
+				if($this->Product_model->add_category()){
+					$this->session->set_flashdata('action_successful','New Category has been added successfully');//flashdata in ci can be used in new view also
+					redirect('admin/categories');
+				}
+			}
 		} else {
 			$this->session->set_flashdata('action_unsuccessful','You didnt supply the category name, displaying index page');
-			redirect('reports/all_products');
+			redirect('admin/all_products');
 		}
 	}
 
@@ -115,7 +140,7 @@ class Admin extends CI_Controller{
 
 		} else {
 			$this->session->set_flashdata('action_unsuccessful','You didnt supply the category name, displaying index page');
-			redirect('reports/all_products');
+			redirect('admin/all_products');
 		}
 	}
 }
