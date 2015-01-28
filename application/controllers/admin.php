@@ -147,11 +147,14 @@ class Admin extends CI_Controller{
 
 	public function delete_category($category_id=null){
 		if(!empty($category_id)){
-
+			//Confirm before removing
+			$this->load->model('Category_model');
+			$this->Category_model->delete_category($category_id);
+			$this->session->set_flashdata('action_successful','The category is successfully deleted');
 		} else {
 			$this->session->set_flashdata('action_unsuccessful','You didnt supply the category name, displaying index page');
-			redirect('admin/categories');
 		}
+		redirect('admin/categories');
 	}
 }
 ?>
