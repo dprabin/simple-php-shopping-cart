@@ -57,7 +57,8 @@ class User_model extends CI_Model{
 			'address2' => $this->input->post('address2'),
 			'phone' => $this->input->post('phone'),
 			'city' => $this->input->post('city'),
-			'state' => $this->input->post('state'));
+			'state' => $this->input->post('state'),
+			'previllege' => $this->input->post('previllege'));
 
 		if($this->session->userdata('user_id')==$id){ //if it is edited by user
 			$data['last_logon_ip'] = $userip;
