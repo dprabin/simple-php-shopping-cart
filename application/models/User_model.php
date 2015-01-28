@@ -28,6 +28,7 @@ class User_model extends CI_Model{
 
 	//Register New User
 	public function register(){
+		$userip=$this->find_user_ip();
 		$data = array(
 			'first_name' => $this->input->post('first_name'),
 			'last_name' => $this->input->post('last_name'),
@@ -39,8 +40,8 @@ class User_model extends CI_Model{
 			'phone' => $this->input->post('phone'),
 			'city' => $this->input->post('city'),
 			'state' => $this->input->post('state'),
-			'last_logon_ip' => $this->find_user_ip(),
-			'geolocation' => $this->geoCheckIP($this->find_user_ip()),
+			'last_logon_ip' => $userip,
+			'geolocation' => $this->geoCheckIP($usesrip),//use this only in live site
 			'last_active' => date("Y-m-d H:i:s")
 			);
 
@@ -52,24 +53,28 @@ class User_model extends CI_Model{
 	public function edit_user($id){
 		$userip=$this->find_user_ip();
 		$data = array(
-			'password' => md5($this->input->post('password')),
 			'address' => $this->input->post('address'),
 			'address2' => $this->input->post('address2'),
 			'phone' => $this->input->post('phone'),
 			'city' => $this->input->post('city'),
-			'state' => $this->input->post('state'),
-			'last_logon_ip' => $userip,
-			'geolocation' => $this->geoCheckIP($userip),
-			'last_active' => date("Y-m-d H:i:s")
-			);
-		//if password is supplied, then add that to array, otherwise dont update that field
-		//don't update last_logon_ip, geolocation and last_active if admin
+			'state' => $this->input->post('state'));
+
+		if($this->session->userdata('user_id')==$id){ //if it is edited by user
+			$data['last_logon_ip'] = $userip;
+			//$data['geolocation'] = $this->geoCheckIP($userip);//use this only on live site
+			$data['last_active'] = date("Y-m-d H:i:s");
+		}
+
+		if($this->input->post('password')!=''){ //update password only if it is supplied
+			$data['password'] = md5($this->input->post('password'));
+		}
+
 		$this->db->where('id',$id);
 		$update = $this->db->update('users',$data);
 		return $update;
 	}
 
-	//Get list of distinct previlleges
+	//Get list of distinct previlleges //May be not necessary //or create another table for previllege
 	public function get_user_previlleges(){
 		$this->db->distinct();
 		$this->db->select('previllege');
