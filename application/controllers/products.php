@@ -108,6 +108,7 @@ class Products extends CI_Controller{
     }
 
     //Remove Product form database
+    //it may be safer to move delete, add, and edit method to admin controller
     public function delete($id=null){
         if(!empty($id)){
             if ($this->session->userdata('previllege')=='admin'){
