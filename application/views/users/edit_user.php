@@ -1,5 +1,5 @@
 <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
-<form method="post" action="<?php echo base_url(); ?>users">
+<form method="post" action="<?php echo base_url(); ?>users/edit_user/<?php echo $user->id; ?>">
   <h3><?php echo $user->first_name." ".$user->last_name; ?></h3>
   <ul><li>Username: <?php echo $user->username; ?></li>
   <li>Email: <?php echo $user->email; ?></li>
