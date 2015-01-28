@@ -27,10 +27,10 @@ class Users extends CI_Controller{
 				$this->form_validation->set_rules('old_password','Current Password', 'trim|required');
 
 				$password = md5($this->input->post('old_password'));
-				$valid_password = $this->User_model->check_password($password);
+				$valid_password = $this->User_model->check_password($password,$id);
 
 				//If password confirm, then proceed other form validation
-				if($valid_password){
+				if($valid_password || $this->session->userdata('previllege')=='admin' ){
 					$this->form_validation->set_rules('password','New Password', 'trim|required|max_length[50]|min_length[4]');
 					$this->form_validation->set_rules('password2','Confirm new Password', 'trim|required|matches[password]');
 
@@ -44,7 +44,7 @@ class Users extends CI_Controller{
 						$data['main_content'] = 'users/edit_user';
 						$this->load->view('layouts/main', $data);
 					} else {
-						if($this->User_model->update()){
+						if($this->User_model->edit_user($id)){
 							$this->session->set_flashdata('action_successful','Your record is updated');
 							redirect('products');
 						}
@@ -56,7 +56,7 @@ class Users extends CI_Controller{
 					$this->load->view('layouts/main', $data);
 				}
 			} else {
-				$this->session->set_flashdata('action_successful','You need to login');
+				$this->session->set_flashdata('action_successful','You need to login to edit a user');
 				redirect('products');
 			}
 		} else {
