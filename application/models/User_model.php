@@ -41,7 +41,7 @@ class User_model extends CI_Model{
 			'city' => $this->input->post('city'),
 			'state' => $this->input->post('state'),
 			'last_logon_ip' => $userip,
-			'geolocation' => $this->geoCheckIP($usesrip),//use this only in live site
+			'geolocation' => $this->geoCheckIP($userip),//use this only in live site
 			'last_active' => date("Y-m-d H:i:s")
 			);
 
