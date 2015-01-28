@@ -69,7 +69,7 @@ class Product_model extends CI_Model{
 		$this->db->where('product_id',$id);
 		//return $this->db->update('order',array('product_deleted'=>'deleted'));
 		//For now, delete all from orders with product id
-		$this->db->delete('order');
+		$this->db->delete('orders');
 		//Complete transaction
 		$this->db->trans_complete();
 		//Return transaction status
