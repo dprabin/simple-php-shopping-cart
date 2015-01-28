@@ -64,7 +64,7 @@ class Users extends CI_Controller{
 		$this->form_validation->set_rules('state','Your country or state', 'trim|required|min_length[4]');
 
 		if($this->form_validation->run() == FALSE){
-			$data['main_content'] = 'register';
+			$data['main_content'] = 'users/register';
 			$this->load->view('layouts/main',$data);
 		} else {
 			if($this->User_model->register()){
