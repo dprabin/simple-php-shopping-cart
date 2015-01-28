@@ -49,6 +49,15 @@ class User_model extends CI_Model{
 		return $update;
 	}
 
+	//Get list of distinct previlleges
+	public function get_user_previlleges(){
+		$this->db->distinct();
+		$this->db->select('previllege');
+		$this->db->from('users');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 	//update  last_active in users table 
 	public function update_last_active(){
 		//$data = array('last_active' => date("Y-m-d H:i:s"));
