@@ -80,11 +80,11 @@ class Products extends CI_Controller{
     public function add(){
         if ($this->session->userdata('previllege')=='admin'){
             //Validate data
-            $this->form_validation->set_rules('title','Username', 'trim|required|max_length[200]|min_length[3]');
-            $this->form_validation->set_rules('category_id','Category', 'trim|required');
+            $this->form_validation->set_rules('title','Product Title', 'trim|required|max_length[200]|min_length[3]|is_unique[products.title]');
+            $this->form_validation->set_rules('category_id','Product Category', 'trim|required');
             $this->form_validation->set_rules('description','Product Description', 'trim|required|min_length[10]');
             $this->form_validation->set_rules('nutritional_value','Nutritional Value', 'trim');
-            $this->form_validation->set_rules('image','Product Image', 'trim|required|max_length[200]|min_length[5]');
+            $this->form_validation->set_rules('image','Product Image', 'trim|required|max_length[200]|min_length[5]|is_unique[products.image]');
             $this->form_validation->set_rules('price','Product Price', 'trim|required|max_length[7]|min_length[1]');
             $this->form_validation->set_rules('unit','Unit of product', 'trim|required|max_length[25]|min_length[1]');
 
@@ -95,7 +95,7 @@ class Products extends CI_Controller{
                 //Add new product
                 if($this->Product_model->add_product()){
                     $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is updated');
-                    redirect('products/details/<?php echo $this->db->insert_id(); ?>');
+                    redirect('products/details/'.$this->db->insert_id());
                 } else {
                     $this->session->set_flashdata('action_unsuccessful','The product '.$this->input->post('title').' is not updated');
                     redirect('products');
@@ -111,7 +111,7 @@ class Products extends CI_Controller{
     public function delete($id=null){
         if(!empty($id)){
             if ($this->session->userdata('previllege')=='admin'){
-                //Confirm before removing product
+                //Confirm before removing product in javascript
                 $this->Product_model->delete_product($id);
                 $this->session->set_flashdata('action_successful','The product is successfully deleted');
             }
