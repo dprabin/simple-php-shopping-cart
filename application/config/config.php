@@ -29,8 +29,14 @@ $config['base_url']	= 'http://localhost:8888/testphp/simple-php-shopping-cart/';
 $config['index_page'] = '';
 
 	
+/*
+|------------------------------------------------------------------------
+| Paypal and shopping cart settings
+|------------------------------------------------------------------------
+*/
 $config['shipping'] = 0;
 $config['tax'] = 0;
+
 $config['paypal_mode']         = 'sandbox'; // sandbox or live
 $config['paypal_api_username']  = 'dprabin@yahoo.com'; //PayPal API Username
 $config['paypal_api_password']  = '123456'; //Paypal API password
@@ -40,6 +46,16 @@ $config['paypal_currency_code'] = 'USD'; //Paypal Currency Code
 $config['paypal_return_url']    = $config['base_url'].'cart/process'; //Point to process.php page
 $config['paypal_cancel_url']    = $config['base_url'].'cart/cancel'; //Cancel URL if user clicks cancel
 
+/*
+|-----------------------------------------------
+| File upload settings
+|-----------------------------------------------
+*/
+$config['upload_path'] = './uploads/';
+$config['allowed_types'] = 'gif|jpg|png';
+$config['max_size'] = '1024';
+$config['max_width']  = '1024';
+$config['max_height']  = '768';
 
 /*
 |--------------------------------------------------------------------------
