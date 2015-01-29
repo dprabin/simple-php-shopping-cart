@@ -86,7 +86,7 @@ class Products extends CI_Controller{
             $this->form_validation->set_rules('category_id','Product Category', 'trim|required');
             $this->form_validation->set_rules('description','Product Description', 'trim|required|min_length[10]');
             $this->form_validation->set_rules('nutritional_value','Nutritional Value', 'trim');
-            $this->form_validation->set_rules('userfile','Product Image', 'required|is_unique[products.image]');
+            //$this->form_validation->set_rules('userfile','Product Image', 'trim|required|max_length[200]|min_length[5]|is_unique[products.image]');
             $this->form_validation->set_rules('price','Product Price', 'trim|required|max_length[7]|min_length[1]');
             $this->form_validation->set_rules('unit','Unit of product', 'trim|required|max_length[25]|min_length[1]');
 
@@ -100,7 +100,6 @@ class Products extends CI_Controller{
                     $this->load->library('upload');
                     $this->upload->do_upload();
                     $file_upload = array('upload_data' => $this->upload->data());
-                    print_r($file_upload);
 
                     $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is updated');
                     redirect('products/details/'.$this->db->insert_id());
