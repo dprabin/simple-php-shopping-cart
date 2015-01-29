@@ -1,6 +1,7 @@
 <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
 
-<form method="post" action="<?php echo base_url(); ?>products/add">
+<?php echo form_open_multipart(base_url().'products/add'); ?>
+<!--form method="post" action="?php echo base_url(); ?>products/add" enctype="multipart/form-data" -->
 	<div class="form-group">
 		<label>Product Title</label>
 		<input type="text" name="title" value="<?php echo set_value('title'); ?>" class="form-control" />
@@ -15,7 +16,7 @@
 	</div>
 	<div class="form-group">
 		<label>Product Image</label>
-		<input type="text" name="image" value="<?php echo set_value('image'); ?>" class="form-control" />
+		<input type="file" name="userfile" value="<?php echo set_value('userfile'); ?>" class="form-control" />
 	</div>
 	<div class="form-group">
 		<label>Product Price</label>
