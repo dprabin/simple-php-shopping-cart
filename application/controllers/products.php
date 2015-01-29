@@ -100,6 +100,7 @@ class Products extends CI_Controller{
                     $this->load->library('upload');
                     $this->upload->do_upload();
                     $file_upload = array('upload_data' => $this->upload->data());
+                    print_r($file_upload);
 
                     $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is updated');
                     redirect('products/details/'.$this->db->insert_id());
