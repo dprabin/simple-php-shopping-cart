@@ -2,6 +2,8 @@
 
 <?php echo form_open_multipart(base_url().'products/add'); ?>
 <!--form method="post" action="?php echo base_url(); ?>products/add" enctype="multipart/form-data" -->
+<?php echo $this->config->item('upload_path'); ?>
+
 	<div class="form-group">
 		<label>Product Title</label>
 		<input type="text" name="title" value="<?php echo set_value('title'); ?>" class="form-control" />
