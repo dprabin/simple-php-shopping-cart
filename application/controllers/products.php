@@ -101,10 +101,10 @@ class Products extends CI_Controller{
                     $this->upload->do_upload();
                     $file_upload = array('upload_data' => $this->upload->data());
 
-                    $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is updated');
+                    $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is added'.http_build_query($file_upload,'',', '));
                     redirect('products/details/'.$this->db->insert_id());
                 } else {
-                    $this->session->set_flashdata('action_unsuccessful','The product '.$this->input->post('title').' is not updated');
+                    $this->session->set_flashdata('action_unsuccessful','The product '.$this->input->post('title').' is not added');
                     redirect('products');
                 }
             }
