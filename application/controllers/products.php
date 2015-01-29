@@ -27,6 +27,7 @@ class Products extends CI_Controller{
     }
 
     //Display the detail information of a product
+    //it may be safer to move delete, add, and edit method to admin controller
     public function edit($id=null){
         if(!empty($id)){
             //If logged in as administrator, edit product 
@@ -77,6 +78,7 @@ class Products extends CI_Controller{
     }
 
     //Add a new product
+    //it may be safer to move delete, add, and edit method to admin controller
     public function add(){
         if ($this->session->userdata('previllege')=='admin'){
             //Validate data
