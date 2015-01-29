@@ -96,6 +96,10 @@ class Products extends CI_Controller{
             } else {
                 //Add new product
                 if($this->Product_model->add_product()){
+                    //Upload the file
+                    $this->load->library('upload');
+                    $this->upload->do_upload();
+
                     $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is updated');
                     redirect('products/details/'.$this->db->insert_id());
                 } else {
