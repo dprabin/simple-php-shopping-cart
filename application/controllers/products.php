@@ -97,11 +97,24 @@ class Products extends CI_Controller{
                 //Add new product
                 if($this->Product_model->add_product()){
                     //Upload the file
-                    $this->load->library('upload');
-                    $this->upload->do_upload();
-                    $file_upload = array('upload_data' => $this->upload->data());
+                    /*$config=array(
+'upload_path' => dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/',
+'upload_url' => base_url().'assets/images/products/',
+'allowed_types' => 'gif|jpg|png|jpeg',
+'overwrite' => TRUE,
+'max_size' => '2048',
+'max_width'  => '1024',
+'max_height'  => '768');*/
 
-                    $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is added'.http_build_query($file_upload,'',', '));
+                    //$test1 =  var_dump(is_dir($config['upload_url']));  
+                    $this->load->library('upload');
+                    //$this->upload->initialize($config);
+                    $this->upload->do_upload();
+                    $file_upload_success = $this->upload->data();
+                    $file_upload_err = $this->upload->display_errors();
+                    
+
+                    $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is added<br>'.http_build_query($file_upload_success,'',', ').'<br>Errors<br>'.$file_upload_err);
                     redirect('products/details/'.$this->db->insert_id());
                 } else {
                     $this->session->set_flashdata('action_unsuccessful','The product '.$this->input->post('title').' is not added');
