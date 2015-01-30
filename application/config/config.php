@@ -50,13 +50,17 @@ $config['paypal_cancel_url']    = $config['base_url'].'cart/cancel'; //Cancel UR
 |-----------------------------------------------
 | File upload settings
 |-----------------------------------------------
+| These settings are not working here so comment out
 */
-$config['upload_path'] = $config['base_url'].'assets/images/products/';
-$config['allowed_types'] = 'gif|jpg|png';
+/*
+$config['upload_path'] = $config['base_url'].'assets/images/products/';//dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/';
+$config['upload_url'] = $config['base_url'].'assets/images/products/';
+$config['allowed_types'] = 'gif|jpg|png|jpeg';
 $config['overwrite'] = TRUE;
 $config['max_size'] = '2048';
 $config['max_width']  = '1024';
 $config['max_height']  = '768';
+*/
 
 /*
 |--------------------------------------------------------------------------
