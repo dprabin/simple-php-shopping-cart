@@ -109,8 +109,6 @@ class Products extends CI_Controller{
                     $this->upload->initialize($config);
 
                     if ($this->upload->do_upload() && $this->Product_model->add_product()){
-                        $fileinfo = $this->upload->data('userfile');
-                        $_POST['filename'] = $fileinfo['file_name'];
                         $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is added');
                         redirect('products/details/'.$this->db->insert_id());
                     } else {
