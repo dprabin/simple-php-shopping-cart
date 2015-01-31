@@ -89,14 +89,20 @@ class Cart extends CI_Controller{
 					'state'    => $this->input->post('state'));
 
 				//Add order data to database 
-				$this->Cart_model->add_order($order_data);
+				if ($this->Cart_model->add_order($order_data)){
+					//Remove ordered item from cart
+					//$data=array($key=>$value);
+					//$this->cart->update($data);
+				}
+
 			}
 			//update last_active
 			$this->User_model->update_last_active();
 
 			//Paypal checkout code here
 
-			//Redirect to products at last
+			//Redirect to products at last with message
+			$this->session->set_flashdata('action_successful','You have successfully ordered items in cart. We will call you soon');
 			redirect('products');
 		}
 	}
