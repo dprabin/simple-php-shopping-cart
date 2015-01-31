@@ -12,7 +12,7 @@ class Products extends CI_Controller{
     }
 
     //Display the detail information of a product
-    public function details($id){
+    public function details($id=null){
         if(!empty($id)){
         	//Get Product Details
         	$data['product'] = $this->Product_model->get_product_details($id);
@@ -94,32 +94,29 @@ class Products extends CI_Controller{
                 $data['main_content'] = 'add';
                 $this->load->view('layouts/main',$data);
             } else {
-                //Add new product
-                if($this->Product_model->add_product()){
-                    //Upload the file
-                    /*$config=array(
-'upload_path' => dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/',
-'upload_url' => base_url().'assets/images/products/',
-'allowed_types' => 'gif|jpg|png|jpeg',
-'overwrite' => TRUE,
-'max_size' => '2048',
-'max_width'  => '1024',
-'max_height'  => '768');*/
+                    //First Upload the file and get filename
+                    $config=array(
+                        'upload_path' => dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/',
+                        'upload_url' => base_url().'assets/images/products/',
+                        'remove_spaces' => TRUE,
+                        'allowed_types' => 'gif|jpg|png|jpeg',
+                        'overwrite' => TRUE,
+                        'max_size' => '2048',
+                        'max_width'  => '1024',
+                        'max_height'  => '768');
+ 
+                    $this->load->library('upload',$config);
+                    $this->upload->initialize($config);
 
-                    //$test1 =  var_dump(is_dir($config['upload_url']));  
-                    $this->load->library('upload');
-                    //$this->upload->initialize($config);
-                    $this->upload->do_upload();
-                    $file_upload_success = $this->upload->data();
-                    $file_upload_err = $this->upload->display_errors();
-                    
-
-                    $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is added<br>'.http_build_query($file_upload_success,'',', ').'<br>Errors<br>'.$file_upload_err);
-                    redirect('products/details/'.$this->db->insert_id());
-                } else {
-                    $this->session->set_flashdata('action_unsuccessful','The product '.$this->input->post('title').' is not added');
-                    redirect('products');
-                }
+                    if ($this->upload->do_upload() && $this->Product_model->add_product()){
+                        $fileinfo = $this->upload->data('userfile');
+                        $_POST['filename'] = $fileinfo['file_name'];
+                        $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is added');
+                        redirect('products/details/'.$this->db->insert_id());
+                    } else {
+                            $this->session->set_flashdata('action_unsuccessful','The product '.$this->input->post('title').' is not added');
+                            redirect('products');
+                    }
             }
         } else {
             $this->session->set_flashdata('action_unsuccessful','You do not have previllege to add new product');
