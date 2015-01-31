@@ -51,7 +51,7 @@ class Product_model extends CI_Model{
 			'title' => $this->input->post('title'),
 			'description' => $this->input->post('description'),
 			'nutritional_value' => $this->input->post('nutritional_value'),
-			'image' => $this->input->post('image'),
+			'image' => $this->input->post('filename'),
 			'price' => $this->input->post('price'),
 			'unit' => $this->input->post('unit'));
 		$insert = $this->db->insert('products',$data);
