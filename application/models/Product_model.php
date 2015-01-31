@@ -46,12 +46,13 @@ class Product_model extends CI_Model{
 
 	//Add new product
 	public function add_product(){
+		$fileinfo = $this->upload->data('userfile');
 		$data = array(
 			'category_id' => $this->input->post('category_id'),
 			'title' => $this->input->post('title'),
 			'description' => $this->input->post('description'),
 			'nutritional_value' => $this->input->post('nutritional_value'),
-			'image' => $this->input->post('filename'),
+			'image' => $fileinfo['file_name'],//$this->input->post('userfile'),
 			'price' => $this->input->post('price'),
 			'unit' => $this->input->post('unit'));
 		$insert = $this->db->insert('products',$data);
