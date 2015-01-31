@@ -41,7 +41,7 @@ class Products extends CI_Controller{
                         $this->form_validation->set_rules('category_id','Category', 'trim|required');
                         $this->form_validation->set_rules('description','Product Description', 'trim|required|min_length[10]');
                         $this->form_validation->set_rules('nutritional_value','Nutritional Value', 'trim');
-                        $this->form_validation->set_rules('image','Product Image', 'trim|required|max_length[200]|min_length[5]');
+                        //$this->form_validation->set_rules('image','Product Image', 'trim|required|max_length[200]|min_length[5]');
                         $this->form_validation->set_rules('price','Product Price', 'trim|required|max_length[7]|min_length[1]');
                         $this->form_validation->set_rules('unit','Unit of product', 'trim|required|max_length[25]|min_length[1]');
                         //Read the product details
@@ -50,8 +50,21 @@ class Products extends CI_Controller{
                             $data['main_content'] = 'edit';
                             $this->load->view('layouts/main',$data);
                         } else {
-                            //Update product
-                            if($this->Product_model->update()){
+                            //First Upload the file and get filename
+                            $config=array(
+                                'upload_path' => dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/',
+                                'upload_url' => base_url().'assets/images/products/',
+                                'remove_spaces' => TRUE,
+                                'allowed_types' => 'gif|jpg|png|jpeg',
+                                'overwrite' => TRUE,
+                                'max_size' => '2048',
+                                'max_width'  => '1024',
+                                'max_height'  => '768');
+         
+                            $this->load->library('upload',$config);
+                            $this->upload->initialize($config);
+
+                            if ($this->upload->do_upload() && $this->Product_model->edit_product()){
                                 $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is updated');
                                 redirect('products');
                             } else {
