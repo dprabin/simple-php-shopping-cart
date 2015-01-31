@@ -1,6 +1,7 @@
 <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
 
-<form method="post" action="<?php echo base_url(); ?>products/edit/1">
+<?php echo form_open_multipart(base_url().'products/edit/1'); ?>
+<!--form method="post" action="<php echo base_url(); ?>products/edit/1"-->
 	<input type="hidden" name="product_id" value="<?php echo $product->id; ?>">
 	<div class="form-group">
 		<label>Product Title</label>
@@ -17,7 +18,7 @@
 	<div class="form-group">
 		<label>Product Image</label>
 		<!--img class="food-image-img" src="<?php echo base_url(); ?>assets/images/products/<?php echo $product->image; ?>" width="150px" /-->
-		<input type="text" name="image" value="<?php echo $product->image; ?>" class="form-control" />
+		<input type="file" name="userfile" value="<?php echo set_value('userfile'); ?>" class="form-control" />
 	</div>
 	<div class="form-group">
 		<label>Product Price</label>
