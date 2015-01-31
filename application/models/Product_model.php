@@ -30,13 +30,14 @@ class Product_model extends CI_Model{
 	}
 
 	//Update products
-	public function update(){
+	public function edit_product(){
+		$fileinfo = $this->upload->data('userfile');
 		$data = array(
 			'category_id' => $this->input->post('category_id'),
 			'title' => $this->input->post('title'),
 			'description' => $this->input->post('description'),
 			'nutritional_value' => $this->input->post('nutritional_value'),
-			'image' => $this->input->post('image'),
+			'image' => $fileinfo['file_name'],//$this->input->post('image'),
 			'price' => $this->input->post('price'),
 			'unit' => $this->input->post('unit'));
 		$this->db->where('id',$this->input->post('product_id'));
