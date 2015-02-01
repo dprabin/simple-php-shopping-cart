@@ -101,7 +101,6 @@ class Product_model extends CI_Model{
 			'max_size' => '2048',
 			'max_width'  => '1024',
 			'max_height'  => '768');
-//print_r($config);echo '<br><br>post<br>';print_r($_POST);echo '<br><br>server<br><pre>';print_r($_SERVER);echo '</pre>';
 		$this->load->library('upload',$config);
 		$this->upload->initialize($config);
 		return $this->upload->do_upload();
@@ -110,7 +109,6 @@ class Product_model extends CI_Model{
 	//generate thumbnail by resizing the image
 	public function generate_thumbnail($image_data){
 		//generate thumbnail with images library
-		// image data comes from $image_data = $this->upload->data();
 		$config = array(
 			'source_image' => $image_data['full_path'],
 			'new_image' => $image_data['file_path'].'/thumbs/'.$image_data['file_name'],
