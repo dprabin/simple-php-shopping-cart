@@ -1,5 +1,15 @@
 <?php 
 class Products extends CI_Controller{
+
+    var $image_path;
+    var $upload_url;
+
+    function Gallery_model(){
+        parent::Model();
+        $this->image_path = realpath(APPPATH. '../assets/images/products/');
+        $this->upload_url = base_url().'assets/images/products/';
+    }
+
     public function index(){
     	//Get All Products
     	$data['products'] = $this->Product_model->get_products();
@@ -52,7 +62,7 @@ class Products extends CI_Controller{
                         } else {
                             //First Upload the file and get filename
                             $config=array(
-                                'upload_path' => dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/',
+                                'upload_path' => $this->imagepath,//dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/',
                                 'upload_url' => base_url().'assets/images/products/',
                                 'remove_spaces' => TRUE,
                                 'allowed_types' => 'gif|jpg|png|jpeg',
@@ -109,8 +119,8 @@ class Products extends CI_Controller{
             } else {
                     //First Upload the file and get filename
                     $config=array(
-                        'upload_path' => dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/',
-                        'upload_url' => base_url().'assets/images/products/',
+                        'upload_path' => $image_path,//dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/',
+                        'upload_url' => $upload_url,//base_url().'assets/images/products/',
                         'remove_spaces' => TRUE,
                         'allowed_types' => 'gif|jpg|png|jpeg',
                         'overwrite' => TRUE,
