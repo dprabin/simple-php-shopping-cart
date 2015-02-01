@@ -89,6 +89,37 @@ class Product_model extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	//Upload the product image
+	public function upload_image(){
+		$config=array(
+			'upload_path' => realpath(APPPATH. '../assets/images/products/'),//dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/',
+			'upload_url' => base_url().'assets/images/products/',//base_url().'assets/images/products/',
+			'remove_spaces' => TRUE,
+			'allowed_types' => 'gif|jpg|png|jpeg',
+			'overwrite' => TRUE,
+			'max_size' => '2048',
+			'max_width'  => '1024',
+			'max_height'  => '768');
+//print_r($config);echo '<br><br>post<br>';print_r($_POST);echo '<br><br>server<br><pre>';print_r($_SERVER);echo '</pre>';
+		$this->load->library('upload',$config);
+		$this->upload->initialize($config);
+		return $this->upload->do_upload();
+	}
+
+	//generate thumbnail by resizing the image
+	public function generate_thumbnail($image_data){
+		//generate thumbnail with images library
+		// image data comes from $image_data = $this->upload->data();
+		$config = array(
+			'source_image' => $image_data['full_path'],
+			'new_image' => $image_data['file_path'].'/thumbs/'.$image_data['file_name'],
+			'maintain_ratio' => TRUE,
+			'width' => 150,
+			'height' => 100);
+		$this->load->library('image_lib',$config);
+		return $this->image_lib->resize();
+	}
 }
 
 ?>
