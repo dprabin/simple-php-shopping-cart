@@ -75,6 +75,17 @@ class Products extends CI_Controller{
                             $this->upload->initialize($config);
 
                             if ($this->upload->do_upload() && $this->Product_model->edit_product()){
+                                //Generate thumbnail by resizing original image with image_library
+                                $image_data = $this->upload->data();
+                                $config = array(
+                                    'source_image' => $image_data['full_path'],
+                                    'new_image' => $this->image_path.'/thumbs/'.$image_data['file_name'],
+                                    'maintain_ratio' => TRUE,
+                                    'width' => 150,
+                                    'height' => 100);
+                                $this->load->library('image_lib',$config);
+                                $this->image_lib->resize();
+
                                 $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is updated');
                                 redirect('products');
                             } else {
@@ -140,7 +151,6 @@ class Products extends CI_Controller{
                             'maintain_ratio' => TRUE,
                             'width' => 150,
                             'height' => 100);
-                        //print_r($config);die();
                         $this->load->library('image_lib',$config);
                         $this->image_lib->resize();
 
