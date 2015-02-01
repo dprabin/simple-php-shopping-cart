@@ -94,7 +94,7 @@ class Product_model extends CI_Model{
 	public function upload_image(){
 		$config=array(
 			'upload_path' => realpath(APPPATH. '../assets/images/products/'),//dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/',
-			'upload_url' => base_url().'assets/images/products/',//base_url().'assets/images/products/',
+			'upload_url' => base_url().'assets/images/products/',
 			'remove_spaces' => TRUE,
 			'allowed_types' => 'gif|jpg|png|jpeg',
 			'overwrite' => TRUE,
