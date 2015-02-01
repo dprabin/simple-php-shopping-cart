@@ -63,7 +63,7 @@ class Products extends CI_Controller{
                             //First Upload the file and get filename
                             $config=array(
                                 'upload_path' => $this->image_path,//dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/',
-                                'upload_url' => base_url().'assets/images/products/',
+                                'upload_url' => $this->upload_url,//base_url().'assets/images/products/',
                                 'remove_spaces' => TRUE,
                                 'allowed_types' => 'gif|jpg|png|jpeg',
                                 'overwrite' => TRUE,
