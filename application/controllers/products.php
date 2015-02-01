@@ -136,10 +136,11 @@ class Products extends CI_Controller{
                         $image_data = $this->upload->data();
                         $config = array(
                             'source_image' => $image_data['full_path'],
-                            'new_image' => $this->image_path.'thumbs',
+                            'new_image' => $this->image_path.'/thumbs/'.$image_data['file_name'],
                             'maintain_ratio' => TRUE,
-                            'widht' => 150,
+                            'width' => 150,
                             'height' => 100);
+                        //print_r($config);die();
                         $this->load->library('image_lib',$config);
                         $this->image_lib->resize();
 
