@@ -136,8 +136,12 @@ class Products extends CI_Controller{
                         $image_data = $this->upload->data();
                         $config = array(
                             'source_image' => $image_data['full_path'],
-                            'new_image' => $this->image_path.'thumbs');
+                            'new_image' => $this->image_path.'thumbs',
+                            'maintain_ratio' => TRUE,
+                            'widht' => 150,
+                            'height' => 100);
                         $this->load->library('image_lib',$config);
+                        $this->image_lib->resize();
 
 
                         $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is added');
