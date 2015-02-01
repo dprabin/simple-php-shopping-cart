@@ -1,15 +1,6 @@
 <?php 
 class Products extends CI_Controller{
 
-    var $image_path;
-    var $upload_url;
-
-    function __construct(){
-        parent::__construct();
-        $this->image_path = realpath(APPPATH. '../assets/images/products/');
-        $this->upload_url = base_url().'assets/images/products/';
-    }
-
     public function index(){
     	//Get All Products
     	$data['products'] = $this->Product_model->get_products();
@@ -60,31 +51,9 @@ class Products extends CI_Controller{
                             $data['main_content'] = 'edit';
                             $this->load->view('layouts/main',$data);
                         } else {
-                            //First Upload the file and get filename
-                            $config=array(
-                                'upload_path' => $this->image_path,//dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/',
-                                'upload_url' => $this->upload_url,//base_url().'assets/images/products/',
-                                'remove_spaces' => TRUE,
-                                'allowed_types' => 'gif|jpg|png|jpeg',
-                                'overwrite' => TRUE,
-                                'max_size' => '2048',
-                                'max_width'  => '1024',
-                                'max_height'  => '768');
-         
-                            $this->load->library('upload',$config);
-                            $this->upload->initialize($config);
-
-                            if ($this->upload->do_upload() && $this->Product_model->edit_product()){
-                                //Generate thumbnail by resizing original image with image_library
-                                $image_data = $this->upload->data();
-                                $config = array(
-                                    'source_image' => $image_data['full_path'],
-                                    'new_image' => $this->image_path.'/thumbs/'.$image_data['file_name'],
-                                    'maintain_ratio' => TRUE,
-                                    'width' => 150,
-                                    'height' => 100);
-                                $this->load->library('image_lib',$config);
-                                $this->image_lib->resize();
+                            if ($this->Product_model->upload_image() && $this->Product_model->edit_product()){
+                                //generate thumbnail with images library
+                                $this->Product_model->generate_thumbnail($this->upload->data());
 
                                 $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is updated');
                                 redirect('products');
@@ -128,39 +97,16 @@ class Products extends CI_Controller{
                 $data['main_content'] = 'add';
                 $this->load->view('layouts/main',$data);
             } else {
-                    //First Upload the file and get filename
-                    $config=array(
-                        'upload_path' => $this->image_path,//dirname($_SERVER["SCRIPT_FILENAME"]).'/assets/images/products/',
-                        'upload_url' => $this->upload_url,//base_url().'assets/images/products/',
-                        'remove_spaces' => TRUE,
-                        'allowed_types' => 'gif|jpg|png|jpeg',
-                        'overwrite' => TRUE,
-                        'max_size' => '2048',
-                        'max_width'  => '1024',
-                        'max_height'  => '768');
- 
-                    $this->load->library('upload',$config);
-                    $this->upload->initialize($config);
+                if ($this->Product_model->upload_image() && $this->Product_model->add_product()){
+                    //generate thumbnail with images library
+                    $this->Product_model->generate_thumbnail($this->upload->data());
 
-                    if ($this->upload->do_upload() && $this->Product_model->add_product()){
-                        //generate thumbnail with images library
-                        $image_data = $this->upload->data();
-                        $config = array(
-                            'source_image' => $image_data['full_path'],
-                            'new_image' => $this->image_path.'/thumbs/'.$image_data['file_name'],
-                            'maintain_ratio' => TRUE,
-                            'width' => 150,
-                            'height' => 100);
-                        $this->load->library('image_lib',$config);
-                        $this->image_lib->resize();
-
-
-                        $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is added');
-                        redirect('products/details/'.$this->db->insert_id());
-                    } else {
-                            $this->session->set_flashdata('action_unsuccessful','The product '.$this->input->post('title').' is not added');
-                            redirect('products');
-                    }
+                    $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is added');
+                    redirect('products/details/'.$this->db->insert_id());
+                } else {
+                    $this->session->set_flashdata('action_unsuccessful','The product '.$this->input->post('title').' is not added');
+                    redirect('products');
+                }
             }
         } else {
             $this->session->set_flashdata('action_unsuccessful','You do not have previllege to add new product');
