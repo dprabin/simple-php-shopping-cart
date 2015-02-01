@@ -132,6 +132,14 @@ class Products extends CI_Controller{
                     $this->upload->initialize($config);
 
                     if ($this->upload->do_upload() && $this->Product_model->add_product()){
+                        //generate thumbnail with images library
+                        $image_data = $this->upload->data();
+                        $config = array(
+                            'source_image' => $image_data['full_path'],
+                            'new_image' => $this->image_path.'thumbs');
+                        $this->load->library('image_lib',$config);
+
+
                         $this->session->set_flashdata('action_successful','The product '.$this->input->post('title').' is added');
                         redirect('products/details/'.$this->db->insert_id());
                     } else {
