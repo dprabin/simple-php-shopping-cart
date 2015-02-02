@@ -139,6 +139,36 @@ class Cart extends CI_Controller{
 					die(urldecode($httpParsedResponseAr["L_LONGMESSAGE0"]));
 				}
 
+				//Catch when the paypal page redirects
+				if(!empty($this->input->get('token')) && !empty($this->input->get('PayerId'))){
+					//we have not received any payment yet
+					$token = $this->input->get('token');
+					$payer_id = $this->input->get('PayerID');
+
+					//get session info that we saved earlier
+					$paypal_product = $_SESSION["paypal_products"];
+					$this->paypal_data = '';
+					$total_price = 0;
+
+					//loop through session array
+					foreach($paypal_product['items'] as $key => $item){
+						$this->paypal_data .= '&L_PAYMENTREQUEST_0_QTY'.$key.'='.urlencode($item['itm_qty']);
+						$this->paypal_data .= '&L_PAYMENTREQUEST_0_AMT'.$key.'='.urlencode($item['itm_price']);
+						$this->paypal_data .= '&L_PAYMENTREQUEST_0_NAME'.$key.'='.urlencode($item['itm_name']);
+						$this->paypal_data .= '&L_PAYMENTREQUEST_0_NUMBER'.$key.'='.urlencode($item['item_code']);
+
+						//get Subtotal
+						$subtotal = ($item['itm_price'] * $item['itm_qty']);
+
+						//get total price
+						$total_price = ($total_price + $subtotal);
+					}
+
+					$padata = '&TOKEN='.urlencode($token).
+				}
+
+
+
 
 			//update last_active
 			$this->User_model->update_last_active();
