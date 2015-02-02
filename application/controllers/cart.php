@@ -100,6 +100,12 @@ class Cart extends CI_Controller{
 			//Get grand total
 			$this->grand_total = $this->total + $this->tax + $this->shipping;
 
+			//Create array of costs
+			$paypal_product['assets'] = array(
+				'tax_total' 	=> $this->tax,
+				'shipping_cost'	=> $this->shipping,
+				'grand_total' 	=> $this->total );
+
 			//update last_active
 			$this->User_model->update_last_active();
 
