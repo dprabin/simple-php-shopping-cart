@@ -175,9 +175,26 @@ class Cart extends CI_Controller{
 							'&PAYMENTREQUEST_0_CURRENCYCODE='.urlencode($this->config->item('paypal_currency_code'));
 
 					//Execute "DoExpressCheckoutPayment"
-					$this->paypal->PPHttpPost('DoExpressCheckoutPayment',$pdata,$this->config->item('paypal_api_username'),$this->config->item('paypal_api_password'),$this->config->item('paypal_api_signature'),$this->config->item('paypal_api_endpoint'));
+					$httpParsedResponseAr = $this->paypal->PPHttpPost('DoExpressCheckoutPayment',$pdata,$this->config->item('paypal_api_username'),$this->config->item('paypal_api_password'),$this->config->item('paypal_api_signature'),$this->config->item('paypal_api_endpoint'));
 
 					//Check if everyting is okay
+					if("SUCCESS" == strtoupper($httpParsedResponseAr['ACK']) || "SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])){
+						//Redirect user to paypal to store with token received
+						$data['trans_id'] = urldecode($httpParsedResponseAr['PAYMENTINFO_0_TRANSACTIONID']);
+
+						//load view
+						$data['main_content'] = 'thankyou';
+						$this->load->view('layouts/main',$data);
+
+						$padata = '&TOKEN='.urlencode($token);
+						$httpParsedResponseAr = $this->paypal->PPHttpPost('GetExpressCheckoutDetails',$pdata,$this->config->item('paypal_api_username'),$this->config->item('paypal_api_password'),$this->config->item('paypal_api_signature'),$this->config->item('paypal_api_endpoint'));
+					} else {
+						//show error message
+						echo '<pre>';
+						print_r($httpParsedResponseAr);
+						echo '</pre>';
+						die(urldecode($httpParsedResponseAr["L_LONGMESSAGE0"]));
+					}
 				}
 
 
