@@ -128,7 +128,7 @@ class Cart extends CI_Controller{
 					'&ALLOWNOTE=1';
 
 				//SetExpressCheckout
-				$httpParsedResponseAr = $this->paypal->PPHttpPost('SetExpressCheckout',$pdata,$this->config->item('paypal_user_id'),$this->config->item('paypal_password'),$this->config->item('paypal_signature'),$this->config->item('paypal_endpoint'))
+				$httpParsedResponseAr = $this->paypal->PPHttpPost('SetExpressCheckout',$pdata,$this->config->item('paypal_api_username'),$this->config->item('paypal_api_password'),$this->config->item('paypal_api_signature'),$this->config->item('paypal_api_endpoint'))
 				if("SUCCESS" == strtoupper($httpParsedResponseAr['ACK']) || "SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])){
 					//Redirect user to paypal to store with token received
 					$paypal_url = 'https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='$httpParsedResponseAr;
