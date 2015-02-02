@@ -127,13 +127,24 @@ class Cart extends CI_Controller{
 					'&CARTBORDERCOLOR=FFFFFF'.
 					'&ALLOWNOTE=1';
 
+				//SetExpressCheckout
+				$httpParsedResponseAr = $this->paypal->PPHttpPost('SetExpressCheckout',$pdata,$this->config->item('paypal_user_id'),$this->config->item('paypal_password'),$this->config->item('paypal_signature'),$this->config->item('paypal_endpoint'))
+				if("SUCCESS" == strtoupper($httpParsedResponseAr['ACK']) || "SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])){
+					//Redirect user to paypal to store with token received
+					$paypal_url = 'https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='$httpParsedResponseAr;
+					header('Location: '.$paypal_url);
+				} else {
+					//show error message
+					print_r($httpParsedResponseAr);
+					die(urldecode($httpParsedResponseAr["L_LONGMESSAGE0"]));
+				}
 
 
 			//update last_active
 			$this->User_model->update_last_active();
 
 			//Redirect to products at last with message
-			$this->session->set_flashdata('action_successful','You have successfully ordered items in cart. We will call you soon');
+			$this->session->set_flashdata('action_successful','You have successfully ordered items in cart. We will contact you soon');
 			redirect('products');
 		}
 	}
