@@ -100,6 +100,7 @@ class Cart extends CI_Controller{
 			//Get grand total
 			$this->grand_total = $this->total + $this->tax + $this->shipping;
 
+			//Paypal checkout code here
 			//Create array of costs
 			$paypal_product['assets'] = array(
 				'tax_total' 	=> $this->tax,
@@ -109,10 +110,27 @@ class Cart extends CI_Controller{
 			//Session array for later
 			$_SESSION['paypal_products'] = $paypal_product;
 
+			//Send params to paypal
+			$padata = '&METHOD=SetExpressCheckout'.
+					'&RETURNURL='.urlencode($this->config->item('paypal_return_url')).
+					'&CANCELURL='.urlencode($this->config->item('paypal_cancel_url')).
+					'&PAYMENTREQUEST_0_PAYMENTACTION='.urlencode("SALE").
+					$this->paypal_data.
+					'&NOSHIPPING=0'.
+					'&PAYMENTREQUEST_0_ITEMAMT='.urlencode($this->total).
+					'&PAYMENTREQUEST_0_TAXAMT='.urlencode($this->tax).
+					'&PAYMENTREQUEST_0_SHIPPINGAMP='.urlencode($this->shipping).
+					'&PAYMENTREQUEST_0_AMT='.urlencode($this->grand_total).
+					'&PAYMENTREQUEST_0_CURRENCYCODE='.urlencode($this->config->item('paypal_currency_code')).
+					'&LOCALECODE=GB'.//match paypal site language with the website language
+					//'&LOGOIMG=http://sastoramro.com.np/logo.png'.//custom logo
+					'&CARTBORDERCOLOR=FFFFFF'.
+					'&ALLOWNOTE=1';
+
+
+
 			//update last_active
 			$this->User_model->update_last_active();
-
-			//Paypal checkout code here
 
 			//Redirect to products at last with message
 			$this->session->set_flashdata('action_successful','You have successfully ordered items in cart. We will call you soon');
