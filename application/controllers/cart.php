@@ -79,14 +79,14 @@ class Cart extends CI_Controller{
 				$order_data = array(
 					'product_id' => $item_id,
 					'user_id' => $this->session->userdata('user_id'),
-					'transaction_id' => 0,
+					'transaction_id' => 0, //later on change to paypal transaction id or auto increment or some code with time
 					'qty'      => $this->input->post('item_qty')[$key],
 					'price'    => $subtotal,
 					'address'  => $this->input->post('address'),
 					'address2' => $this->input->post('address2'),
 					'phone'    => $this->input->post('phone'),
 					'city'     => $this->input->post('city'),
-					'state'    => $this->input->post('state'));
+					'state'    => $this->input->post('state'));// also add geolocation and user ip in this table
 
 				//Add order data to database 
 				if ($this->Cart_model->add_order($order_data)){
@@ -96,6 +96,10 @@ class Cart extends CI_Controller{
 				}
 
 			}
+
+			//Get grand total
+			$this->grand_total = $this->total + $this->tax + $this->shipping;
+
 			//update last_active
 			$this->User_model->update_last_active();
 
