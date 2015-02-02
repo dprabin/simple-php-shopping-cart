@@ -106,6 +106,9 @@ class Cart extends CI_Controller{
 				'shipping_cost'	=> $this->shipping,
 				'grand_total' 	=> $this->total );
 
+			//Session array for later
+			$_SESSION['paypal_products'] = $paypal_product;
+
 			//update last_active
 			$this->User_model->update_last_active();
 
