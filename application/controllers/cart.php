@@ -128,7 +128,7 @@ class Cart extends CI_Controller{
 					'&ALLOWNOTE=1';
 
 				//SetExpressCheckout
-				$httpParsedResponseAr = $this->paypal->PPHttpPost('SetExpressCheckout',$pdata,$this->config->item('paypal_api_username'),$this->config->item('paypal_api_password'),$this->config->item('paypal_api_signature'),$this->config->item('paypal_api_endpoint'))
+				$httpParsedResponseAr = $this->paypal->PPHttpPost('SetExpressCheckout',$pdata,$this->config->item('paypal_api_username'),$this->config->item('paypal_api_password'),$this->config->item('paypal_api_signature'),$this->config->item('paypal_api_endpoint'));
 				if("SUCCESS" == strtoupper($httpParsedResponseAr['ACK']) || "SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])){
 					//Redirect user to paypal to store with token received
 					$paypal_url = 'https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token='$httpParsedResponseAr;
@@ -165,6 +165,19 @@ class Cart extends CI_Controller{
 					}
 
 					$padata = '&TOKEN='.urlencode($token).
+							'&PAYERID='.urlencode($payer_id).
+							'&PAYMENTREQUEST_0_PAYMENTACTION='.urlencode("SALE").
+							$this->paypal_data.
+							'&PAYMENTREQUEST_0_ITEMAMT='.urlencode($total_price).
+							'&PAYMENTREQUEST_0_TAXAMT='.urlencode($paypal_product['assets']['tax_total']).
+							'&PAYMENTREQUEST_0_SHIPPINGAMP='.urlencode($paypal_product['assets']['shipping_cost']).
+							'&PAYMENTREQUEST_0_AMT='.urlencode($paypal_product['assets']['grand_total']).
+							'&PAYMENTREQUEST_0_CURRENCYCODE='.urlencode($this->config->item('paypal_currency_code'));
+
+					//Execute "DoExpressCheckoutPayment"
+					$this->paypal->PPHttpPost('DoExpressCheckoutPayment',$pdata,$this->config->item('paypal_api_username'),$this->config->item('paypal_api_password'),$this->config->item('paypal_api_signature'),$this->config->item('paypal_api_endpoint'));
+
+					//Check if everyting is okay
 				}
 
 
