@@ -133,7 +133,7 @@ class Products extends CI_Controller{
     //Category viewer
     public function category($id=null){
          if(!empty($id)){
-            $data['category_items'] = $this->Product_model->get_category_items($id);
+            $data['category_items'] = $this->Product_model->get_products_by('category_id',$id);
             $data['main_content'] = 'category';
             $this->load->view('layouts/main',$data);
         } else {
