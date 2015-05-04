@@ -49,6 +49,7 @@ class Cart extends CI_Controller{
 	}
 
 	//Process a cart
+	/*
 	public function process(){
 		//moved this to constructor
 		$this->tax = $this->config->item('tax');
@@ -207,7 +208,7 @@ class Cart extends CI_Controller{
 			$this->session->set_flashdata('action_successful','You have successfully ordered items in cart. We will contact you soon');
 			redirect('products');
 		}
-	}
+	}*/
 }
 
 ?>
