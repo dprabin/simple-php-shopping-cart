@@ -38,13 +38,18 @@ $config['shipping'] = 0;
 $config['tax'] = 0;
 
 $config['paypal_mode']         = 'sandbox'; // sandbox or live
-$config['paypal_api_username']  = 'dprabin@yahoo.com'; //PayPal API Username
-$config['paypal_api_password']  = '123456'; //Paypal API password
-$config['paypal_api_signature'] = 'ZWxwchnCsdQg5PxAUjcH6OPuZK3sPcPH'; //Paypal API Signature
+$config['paypal_api_username']  = 'amritms-facilitator_api1.hotmail.com'; //PayPal API Username
+$config['paypal_api_password']  = 'AVCQ736K4FVV38TZ'; //Paypal API password
+$config['paypal_api_signature'] = 'AFcWxV21C7fd0v3bYYYRCpSSRl31AjOvHDkC.3FyQLtjFuNgcGPx45yv'; //Paypal API Signature
 $config['paypal_api_endpoint']  = 'https://api-3t.sandbox.paypal.com/nvp'; //sandbox or live: https://api-3t.paypal.com/nvp
 $config['paypal_currency_code'] = 'USD'; //Paypal Currency Code
-$config['paypal_return_url']    = $config['base_url'].'cart/process'; //Point to process.php page
-$config['paypal_cancel_url']    = $config['base_url'].'cart/cancel'; //Cancel URL if user clicks cancel
+$config['paypal_return_url']    = $config['base_url'].'cart/payment_success'; //Point to process.php page
+$config['paypal_cancel_url']    = $config['base_url'].'cart/payment_error'; //Cancel URL if user clicks cancel
+
+//define('PAYPAL_MODE', 'sandbox'); // sandbox or live
+//define('PAYPAL_API_USERNAME','amritms-facilitator_api1.hotmail.com'); //PayPal API Username
+//define('PAYPAL_API_PASSWORD','AVCQ736K4FVV38TZ');  //Paypal API password
+//define('PAYPAL_API_SIGNATURE', 'AFcWxV21C7fd0v3bYYYRCpSSRl31AjOvHDkC.3FyQLtjFuNgcGPx45yv'); //Paypal API Signature
 
 /*
 |-----------------------------------------------

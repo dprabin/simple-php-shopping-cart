@@ -16,7 +16,7 @@
 				<input type="hidden" name="<?php echo 'item_name['.$i.']'; ?>" value="<?php echo $items['name'] ?>" />
 				<input type="hidden" name="<?php echo 'item_code['.$i.']'; ?>" value="<?php echo $items['id'] ?>" />
 				<input type="hidden" name="<?php echo 'item_qty['.$i.']'; ?>" value="<?php echo $items['qty'] ?>" />
-			<?php endforeach; ?>
+			<?php ++$i; endforeach; ?>
 			<tr>
 				<td></td>
 				<td class="right"><strong>Shipping</strong></td>
