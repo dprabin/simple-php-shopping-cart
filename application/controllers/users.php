@@ -50,6 +50,7 @@ class Users extends CI_Controller{
 					$this->load->view('layouts/main', $data);
 				} else {
 					if($this->User_model->edit_user($id)){
+						echo $this->db->last_query();die;
 						if ($this->session->userdata('previllege')=='admin'){
 							$this->session->set_flashdata('action_successful','User account updated');//flashdata in ci can be used in new view also
 							redirect('users');
