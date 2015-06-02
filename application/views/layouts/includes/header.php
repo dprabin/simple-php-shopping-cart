@@ -44,9 +44,10 @@
         <?php if($this->session->userdata('previllege')=='admin') : ?>
           <li><a href="<?php echo base_url(); ?>products/add">Add Product</a></li>
         <?php endif; ?>
-        <li><a href="https://github.com/dprabin/simple-php-shopping-cart">Download</a></li>
+<!--        <li><a href="https://github.com/dprabin/simple-php-shopping-cart">Download</a></li>-->
 
       </ul>
+      <?php $this->load->view('layouts/includes/search_bar');?>
       <?php if(!$this->session->userdata('logged_in')) : ?>
         <form method="post" action="<?php echo base_url(); ?>users/login" class="navbar-form navbar-right">
           <div class="form-group">

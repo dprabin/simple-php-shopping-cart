@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost:8888/testphp/simple-php-shopping-cart/';
+$config['base_url']	= 'http://localhost/private_works/simple-php-shopping-cart/';
 
 /*
 |--------------------------------------------------------------------------

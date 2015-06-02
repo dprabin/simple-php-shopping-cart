@@ -20,13 +20,21 @@ class Product_model extends CI_Model{
 	}
 
 	//Generic method to get products by any field and value
-	public function get_products_by($fieldname,$fieldvalue){
-		$this->db->select('p.*,c.name',false); //false will escape characters
+	public function get_products_by($search_terms, $limit = 10, $offset = '' )
+	{
+
+		$term = strtolower(trim( $search_terms[ 'category_id' ] ));
+
+		$this->db->select('SQL_CALC_FOUND_ROWS p.*,c.name',false); //false will escape characters
 		$this->db->from('products as p');
 		$this->db->join('categories as c','c.id=p.category_id','inner');
-		$this->db->where($fieldname,$fieldvalue);
-		$query = $this->db->get();
-		return $query->result();
+		$this->db->where('p.category_id', $term);
+		$this->db->limit( $limit, $offset );
+
+		$data[ 'result' ] = $this->db->get()->result();
+		//                echo $this->db->last_query();;
+		$data[ 'total_rows' ] = $this->db->query( "SELECT FOUND_ROWS() total_rows" )->row()->total_rows;
+		return $data;
 	}
 
 	//Update products
